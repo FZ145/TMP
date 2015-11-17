@@ -2,9 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="668fbf5e-80fe-4ab3-a70d-633f524f90cd" name="Default" comment="">
-      <change type="DELETED" beforePath="D:\MyEclipse\MyEclipse\workspace\TMP\TMP\.gitattributes" afterPath="" />
-      <change type="DELETED" beforePath="D:\MyEclipse\MyEclipse\workspace\TMP\TMP\.gitignore" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/vcs.xml" afterPath="$PROJECT_DIR$/.idea/vcs.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/tmp/task/ComponentReputationTask.java" afterPath="$PROJECT_DIR$/src/main/java/tmp/task/ComponentReputationTask.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="TMP.iws" />
@@ -68,8 +66,8 @@
       <file leaf-file-name="ComponentReputationTask.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/tmp/task/ComponentReputationTask.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.582343" vertical-offset="182" max-vertical-offset="875">
-              <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.4329897" vertical-offset="182" max-vertical-offset="875">
+              <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -133,9 +131,9 @@
         <option value="$PROJECT_DIR$/src/main/java/tmp/dao/ProviderTrustValueMapper.java" />
         <option value="$PROJECT_DIR$/src/main/java/tmp/dao/ProviderTrustValueMapper.xml" />
         <option value="$PROJECT_DIR$/src/main/java/tmp/service/impl/RenterReputationServiceImpl.java" />
-        <option value="$PROJECT_DIR$/src/main/java/tmp/task/ComponentReputationTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/tmp/task/ProviderReputationTask.java" />
         <option value="$PROJECT_DIR$/src/main/java/tmp/task/RenterReputationTask.java" />
+        <option value="$PROJECT_DIR$/src/main/java/tmp/task/ComponentReputationTask.java" />
       </list>
     </option>
   </component>
@@ -1064,7 +1062,7 @@
       <workItem from="1446864530887" duration="11762000" />
       <workItem from="1447243172513" duration="113000" />
       <workItem from="1447584659849" duration="10708000" />
-      <workItem from="1447779688451" duration="298000" />
+      <workItem from="1447779688451" duration="1086000" />
     </task>
     <task id="LOCAL-00001" summary="整理项目">
       <created>1447779860957</created>
@@ -1072,11 +1070,17 @@
       <option name="project" value="LOCAL" />
       <updated>1447779860957</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="整理项目">
+      <created>1447780354462</created>
+      <option name="number" value="00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1447780354462</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="71401000" />
+    <option name="totallyTimeSpent" value="72189000" />
   </component>
   <component name="TodoView" selected-index="0">
     <todo-panel id="selected-file">
@@ -1115,7 +1119,7 @@
       <window_info id="JSF" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847896" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32524273" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847896" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32847896" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Palette&#9;" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -1548,8 +1552,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/tmp/task/ComponentReputationTask.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.582343" vertical-offset="182" max-vertical-offset="875">
-          <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
+        <state vertical-scroll-proportion="0.4329897" vertical-offset="182" max-vertical-offset="875">
+          <caret line="14" column="38" selection-start-line="14" selection-start-column="38" selection-end-line="14" selection-end-column="38" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
