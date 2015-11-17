@@ -15,7 +15,7 @@ import java.util.List;
 public class ComponentReputationTask {
     @Resource
     private ComponentMapper componentMapper;
-    @Resource
+    @Resourced
     private ComponentReputationService componentReputationService;
     //每小时运行一次，计算所有组件的声誉，存入数据库
     @Scheduled(cron = "0 0 0/1 * * *")
