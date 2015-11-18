@@ -1,50 +1,34 @@
-<<<<<<< HEAD
-# Windows image file caches
-Thumbs.db
-ehthumbs.db
+# kdiff3 ignore
+*.orig
 
-# Folder config file
-Desktop.ini
+# maven ignore
+target/
 
-# Recycle Bin used on file shares
-$RECYCLE.BIN/
+# eclipse ignore
+.settings/
+.project
+.classpath
 
-# Windows Installer files
-*.cab
-*.msi
-*.msm
-*.msp
-
-# Windows shortcuts
-*.lnk
-
-# =========================
-# Operating System Files
-# =========================
-
-# OSX
-# =========================
-
-.DS_Store
-.AppleDouble
-.LSOverride
-
-# Thumbnails
-._*
-
-# Files that might appear on external disk
-.Spotlight-V100
-.Trashes
-
-# Directories potentially created on remote AFP share
-.AppleDB
-.AppleDesktop
-Network Trash Folder
-Temporary Items
-.apdisk
-
+# idea ignore
+.idea/
+*.ipr
 *.iml
-target/*
-logs/*
-.idea/*
+*.iws
+
+# temp ignore
 *.log
+*.cache
+*.diff
+*.patch
+*.tmp
+
+# system ignore
+.DS_Store
+Thumbs.db
+
+# package ignore (optional)
+# *.jar
+# *.war
+# *.zip
+# *.tar
+# *.tar.gz
