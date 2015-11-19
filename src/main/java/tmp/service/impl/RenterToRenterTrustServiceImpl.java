@@ -1,5 +1,6 @@
 package tmp.service.impl;
 
+import org.springframework.stereotype.Service;
 import tmp.bo.HistoryAndWeight;
 import tmp.dao.RenterHistoryMapper;
 import tmp.dao.RenterTrustValueMapper;
@@ -18,8 +19,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
+ * 计算租户与租户的信任，将结果存入rentertrustvalue表中
  * Created by shining.cui on 2015/11/6.
  */
+@Service("renterToRenterTrustService")
 public class RenterToRenterTrustServiceImpl implements RenterToRenterTrustService {
     @Resource
     private RenterHistoryMapper renterHistoryMapper;
@@ -131,11 +134,11 @@ public class RenterToRenterTrustServiceImpl implements RenterToRenterTrustServic
                     recommenderUid);
             BigDecimal renterToRecommenderTrustValue;
             if (renterToRecommenderTrust == null) {
-                renterToRecommenderTrustValue = BigDecimal.ZERO;
+                renterToRecommenderTrustValue = new BigDecimal(0.5);
             } else {
                 renterToRecommenderTrustValue = renterToRecommenderTrust.getTrustValue();
-                times++;
             }
+            times++;
             sum = sum.add(recommenderDirectTrustValue.multiply(renterToRecommenderTrustValue));
         }
         if (times == 0) {

@@ -149,7 +149,7 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
                     recommenderUid);
             BigDecimal renterToRecommenderTrustValue;
             if (renterToRecommenderTrust == null) {
-                renterToRecommenderTrustValue = BigDecimal.ZERO;
+                renterToRecommenderTrustValue = new BigDecimal(0.5);
             } else {
                 renterToRecommenderTrustValue = renterToRecommenderTrust.getTrustValue();
                 times++;
