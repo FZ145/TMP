@@ -1,4 +1,4 @@
-package tmp.service;
+package tmp.service.impl;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,6 +8,7 @@ import tmp.dao.ComponentMapper;
 import tmp.dao.RenterMapper;
 import tmp.entity.Component;
 import tmp.entity.Renter;
+import tmp.service.RenterToCompTrustService;
 
 import javax.annotation.Resource;
 
@@ -17,7 +18,7 @@ import java.util.Random;
 import static org.junit.Assert.*;
 @RunWith(SpringJUnit4ClassRunner.class)        //表示继承了SpringJUnit4ClassRunner类
 @ContextConfiguration(locations = {"classpath:spring-mybatis.xml"})
-public class RenterToCompTrustServiceTest {
+public class RenterToCompTrustImplServiceTest {
     @Resource
     private RenterToCompTrustService renterToCompTrustService;
     @Resource
