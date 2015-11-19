@@ -20,10 +20,9 @@ public interface RenterTrustValueMapper {
 
     int updateByPrimaryKey(RenterTrustValue record);
 
-    RenterTrustValue queryLatestTrustValue(@Param(value="trustorUid")String trustorUid,
-                          @Param(value="trusteeUid")String trusteeUid);
+    RenterTrustValue queryLatestTrustValue(@Param(value = "trustorUid") String trustorUid,
+            @Param(value = "trusteeUid") String trusteeUid);
 
-    List<RenterTrustValue> selectByTrustorAndTrusteeUid(@Param(value="trustorUid")String trustorUid,
-                                                           @Param(value="trusteeUid")String trusteeUid,
-                                                           @Param(value="actionType")Integer actionType);
+    List<RenterTrustValue> selectByTrustorAndTrusteeUid(@Param(value = "trustorUid") String trustorUid,
+            @Param(value = "trusteeUid") String trusteeUid, @Param(value = "actionType") Integer actionType);
 }

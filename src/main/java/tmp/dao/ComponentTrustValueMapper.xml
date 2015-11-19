@@ -7,10 +7,11 @@
         <result column="trustorUid" property="trustorUid" jdbcType="VARCHAR"/>
         <result column="trusteeUid" property="trusteeUid" jdbcType="VARCHAR"/>
         <result column="trustValue" property="trustValue" jdbcType="DECIMAL"/>
+        <result column="actionType" property="actionType" jdbcType="TINYINT"/>
         <result column="createTime" property="createTime" jdbcType="TIMESTAMP"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, uid, trustorUid, trusteeUid, trustValue, createTime
+    id, uid, trustorUid, trusteeUid, trustValue, createTime,actionType
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
@@ -24,10 +25,10 @@
   </delete>
     <insert id="insert" parameterType="tmp.entity.ComponentTrustValue">
     insert into componenttrustValue (id, uid, trustorUid,
-      trusteeUid, trustValue, createTime
+      trusteeUid, trustValue, actionType,createTime
       )
     values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{trustorUid,jdbcType=VARCHAR},
-      #{trusteeUid,jdbcType=VARCHAR}, #{trustValue,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}
+      #{trusteeUid,jdbcType=VARCHAR}, #{trustValue,jdbcType=DECIMAL}, #{actionType,jdbcType=INTEGER},#{createTime,jdbcType=TIMESTAMP}
       )
   </insert>
     <insert id="insertSelective" parameterType="tmp.entity.ComponentTrustValue">
@@ -48,6 +49,9 @@
             <if test="trustValue != null">
                 trustValue,
             </if>
+            <if test="actionType != null">
+                actionType,
+            </if>
             <if test="createTime != null">
                 createTime,
             </if>
@@ -67,6 +71,9 @@
             </if>
             <if test="trustValue != null">
                 #{trustValue,jdbcType=DECIMAL},
+            </if>
+            <if test="actionType != null">
+                #{actionType,jdbcType=INTEGER},
             </if>
             <if test="createTime != null">
                 #{createTime,jdbcType=TIMESTAMP},
@@ -129,6 +136,9 @@
         </if>
         <if test="trusteeUid != null and trusteeUid != ''">
             and  trusteeUid = #{trusteeUid,jdbcType=VARCHAR}
+        </if>
+        <if test="actionType != null" >
+            and actionType = #{actionType,jdbcType=TINYINT}
         </if>
     </select>
 </mapper>

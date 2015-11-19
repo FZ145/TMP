@@ -5,6 +5,7 @@ import org.springframework.stereotype.Repository;
 import tmp.entity.ComponentTrustValue;
 
 import java.util.List;
+
 @Repository
 public interface ComponentTrustValueMapper {
     int deleteByPrimaryKey(Integer id);
@@ -19,9 +20,9 @@ public interface ComponentTrustValueMapper {
 
     int updateByPrimaryKey(ComponentTrustValue record);
 
-    List<ComponentTrustValue> selectByTrustorAndTrusteeUid(@Param(value="trustorUid")String trustorUid,
-                                                        @Param(value="trusteeUid")String trusteeUid);
+    List<ComponentTrustValue> selectByTrustorAndTrusteeUid(@Param(value = "trustorUid") String trustorUid,
+            @Param(value = "trusteeUid") String trusteeUid, @Param(value = "actionType") Integer actionType);
 
-    ComponentTrustValue queryLatestTrustValue(@Param(value="trustorUid")String trustorUid,
-                                              @Param(value="trusteeUid")String trusteeUid);
+    ComponentTrustValue queryLatestTrustValue(@Param(value = "trustorUid") String trustorUid,
+            @Param(value = "trusteeUid") String trusteeUid);
 }

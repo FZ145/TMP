@@ -59,7 +59,7 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
         }
         //将全局信任评估结果保存到数据库
         ComponentTrustValue componentTrustValue = new ComponentTrustValue();
-        componentTrustValue.setCreatetime(new Date());
+        componentTrustValue.setCreateTime(new Date());
         componentTrustValue.setTrustValue(overallTrust);
         componentTrustValue.setTrusteeUid(trusteeUid);
         componentTrustValue.setTrustorUid(trustorUid);
@@ -115,7 +115,7 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
         String trusteeUid = trustee.getUid();
         BigDecimal indirectTrust;
         //查询与该组件有直接信任的组件，作为推荐组件
-        List<ComponentTrustValue> componentTrustValues = componentTrustValueMapper.selectByTrustorAndTrusteeUid(null, trusteeUid);
+        List<ComponentTrustValue> componentTrustValues = componentTrustValueMapper.selectByTrustorAndTrusteeUid(null, trusteeUid,1);
         //获得推荐人名单，去重，去自身
         List<String> recommenders = new ArrayList<String>();
         for (ComponentTrustValue trustValues : componentTrustValues) {

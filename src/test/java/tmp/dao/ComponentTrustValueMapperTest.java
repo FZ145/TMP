@@ -24,12 +24,12 @@ public class ComponentTrustValueMapperTest  {
         componentTrustValue.setTrustorUid("component1");
         componentTrustValue.setTrusteeUid("component3");
         componentTrustValue.setTrustValue(new BigDecimal(0.64));
-        componentTrustValue.setCreatetime(new Date());
+        componentTrustValue.setCreateTime(new Date());
         componentTrustValueMapper.insert(componentTrustValue);
     }
     @Test
     public void testSelectByTrustorAndTrusteeUid() throws Exception {
-        List<ComponentTrustValue> componentTrustValues = componentTrustValueMapper.selectByTrustorAndTrusteeUid(null, "component3");
+        List<ComponentTrustValue> componentTrustValues = componentTrustValueMapper.selectByTrustorAndTrusteeUid(null, "component3",null);
         System.out.println(componentTrustValues);
     }
     @Test

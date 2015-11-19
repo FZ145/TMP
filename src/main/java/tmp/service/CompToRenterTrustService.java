@@ -11,10 +11,4 @@ import java.math.BigDecimal;
 public interface CompToRenterTrustService {
     //计算组件对租户的全局信任
     public BigDecimal calcCompToRenterTrust(Component component,Renter renter);
-
-    //计算组件对租户的直接信任
-    public BigDecimal calcCompToRenterDirectTrust(Component component,Renter renter);
-
-    //计算组件对租户的间接信任
-    public BigDecimal calcCompToRenterIndirectTrust(Component component,Renter renter);
 }
