@@ -11,10 +11,4 @@ import java.math.BigDecimal;
 public interface RenterToRenterTrustService {
     //计算租户对租户的全局信任
     public BigDecimal calcRenterToRenterTrust(Renter trustor, Renter trustee);
-
-    //计算租户对租户的直接信任
-    public BigDecimal calcRenterToRenterDirectTrust(Renter trustor, Renter trustee);
-
-    //计算租户对租户的间接信任
-    public BigDecimal calcRenterToRenterIndirectTrust(Renter trustor, Renter trustee);
 }
