@@ -8,11 +8,11 @@ import java.math.RoundingMode;
  */
 public class Weight {
 
-    public static BigDecimal calcDirectTrustWeight(int directTimes,int totalTimes){
+    public static BigDecimal calcDirectTrustWeight(int directTimes, int totalTimes) {
 
-        BigDecimal divisor2 = new BigDecimal(totalTimes);
-        BigDecimal divisor1 = new BigDecimal(directTimes);
-        BigDecimal weight = divisor1.divide(divisor2,4, RoundingMode.HALF_UP);
+        BigDecimal divisor2 = new BigDecimal(totalTimes + directTimes * 4 + 1);
+        BigDecimal divisor1 = new BigDecimal(directTimes * 5 + 1);
+        BigDecimal weight = divisor1.divide(divisor2, 4, RoundingMode.HALF_UP);
         return weight;
     }
 }

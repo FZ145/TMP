@@ -119,7 +119,11 @@
         select
         <include refid="Base_Column_List" />
         from renterhistory
-        where trustorUid = #{trustorUid,jdbcType=VARCHAR}
+        where
+        1
+        <if test="trustorUid != null and trustorUid != ''" >
+            and trustorUid = #{trustorUid,jdbcType=VARCHAR}
+        </if>
         <if test="trusteeUid != null and trusteeUid != ''" >
             and trusteeUid = #{trusteeUid,jdbcType=VARCHAR}
         </if>

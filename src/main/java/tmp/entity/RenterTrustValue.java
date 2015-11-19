@@ -16,6 +16,8 @@ public class RenterTrustValue {
 
     private Date createTime;
 
+    private Integer actionType;
+
     public Integer getId() {
         return id;
     }
@@ -56,23 +58,34 @@ public class RenterTrustValue {
         this.trustValue = trustValue;
     }
 
-    public Date getCreatetime() {
+    public Date getCreateTime() {
         return createTime;
     }
 
-    public void setCreatetime(Date createTime) {
+    public void setCreateTime(Date createTime) {
         this.createTime = createTime;
+    }
+
+    public Integer getActionType() {
+        return actionType;
+    }
+
+    public void setActionType(Integer actionType) {
+        this.actionType = actionType;
     }
 
     @Override
     public String toString() {
-        return "RenterTrustValue{" +
-                "id=" + id +
-                ", uid='" + uid + '\'' +
-                ", trustorUid='" + trustorUid + '\'' +
-                ", trusteeUid='" + trusteeUid + '\'' +
-                ", trustValue=" + trustValue +
-                ", createTime=" + createTime +
-                '}';
+        final StringBuilder sb = new StringBuilder("RenterTrustValue{");
+        sb.append("id=").append(id);
+        sb.append(", uid='").append(uid).append('\'');
+        sb.append(", trustorUid='").append(trustorUid).append('\'');
+        sb.append(", trusteeUid='").append(trusteeUid).append('\'');
+        sb.append(", trustValue=").append(trustValue);
+        sb.append(", createTime=").append(createTime);
+        sb.append(", actionType=").append(actionType);
+        sb.append('}');
+        return sb.toString();
     }
+
 }

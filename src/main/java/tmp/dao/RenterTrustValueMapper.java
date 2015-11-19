@@ -24,5 +24,6 @@ public interface RenterTrustValueMapper {
                           @Param(value="trusteeUid")String trusteeUid);
 
     List<RenterTrustValue> selectByTrustorAndTrusteeUid(@Param(value="trustorUid")String trustorUid,
-                                                           @Param(value="trusteeUid")String trusteeUid);
+                                                           @Param(value="trusteeUid")String trusteeUid,
+                                                           @Param(value="actionType")Integer actionType);
 }

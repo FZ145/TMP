@@ -50,7 +50,7 @@ public class RenterToRenterTrustServiceImpl implements RenterToRenterTrustServic
         }
         //将全局信任评估结果保存到数据库
         RenterTrustValue renterTrustValue = new RenterTrustValue();
-        renterTrustValue.setCreatetime(new Date());
+        renterTrustValue.setCreateTime(new Date());
         renterTrustValue.setTrustValue(overallTrust);
         renterTrustValue.setTrusteeUid(trusteeUid);
         renterTrustValue.setTrustorUid(trustorUid);
@@ -94,7 +94,7 @@ public class RenterToRenterTrustServiceImpl implements RenterToRenterTrustServic
         String trusteeUid = trustee.getUid();
         BigDecimal indirectTrust;
         //查询与该租户有直接信任的租户，作为推荐租户
-        List<RenterTrustValue> renterTrustValues = renterTrustValueMapper.selectByTrustorAndTrusteeUid(null, trusteeUid);
+        List<RenterTrustValue> renterTrustValues = renterTrustValueMapper.selectByTrustorAndTrusteeUid(null, trusteeUid,1);
         //获得推荐人名单，去重，去自身
         List<String> recommenders = new ArrayList<String>();
         for (RenterTrustValue trustValues : renterTrustValues) {
