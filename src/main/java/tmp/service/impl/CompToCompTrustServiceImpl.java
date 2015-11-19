@@ -39,17 +39,19 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
         String trustorUid = trustor.getUid();
         String trusteeUid = trustee.getUid();
         BigDecimal overallTrust;
-        //查询组件与组件的交互历史次数
-        List<ComponentHistory> componentHistories = componentHistoryMapper.selectByTrustorAndTrusteeUid(trustorUid, trusteeUid, null);
-        int directTimes = componentHistories.size();
-        //查询组件与所有组件的交互历史次数
-        List<ComponentHistory> histories = componentHistoryMapper.selectByTrustorAndTrusteeUid(trustorUid, null, 1);
-        int totalTimes = histories.size();
+        //查询组件与组件的信任评估历史次数
+        List<ComponentTrustValue> componentTrustValues = componentTrustValueMapper.selectByTrustorAndTrusteeUid(trustorUid, trusteeUid, null);
+        int directTimes = componentTrustValues.size();
+        //查询其他组件与该组件的交互历史次数
+        List<ComponentTrustValue> trustValues = componentTrustValueMapper.selectByTrustorAndTrusteeUid(null, trusteeUid, 1);
+        int totalTimes = trustValues.size();
         //计算直接信任与间接信任
         BigDecimal directTrust = calcCompToCompDirectTrust(trustor,trustee);
         BigDecimal indirectTrust = calcCompToCompIndirectTrust(trustor,trustee);
         //根据交互次数分配直接信任与间接信任的权重
-        if (directTimes >= staticValue.activeTimesThreshold) {
+        if (directTimes >= staticValue.ACTIVE_TIMES_THRESHOLD) {
+            overallTrust = directTrust;
+        } else if (totalTimes - directTimes == 0) {
             overallTrust = directTrust;
         } else if (directTimes == 0) {
             overallTrust = indirectTrust;
@@ -65,12 +67,12 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
         componentTrustValue.setTrustorUid(trustorUid);
         //uid为唯一键，作为唯一流水号
         componentTrustValue.setUid("" + new Date().getTime() + trustorUid);
+        componentTrustValue.setActionType(1);
         componentTrustValueMapper.insertSelective(componentTrustValue);
         return overallTrust;
     }
 
-    @Override
-    public BigDecimal calcCompToCompDirectTrust(Component trustor, Component trustee) {
+    private BigDecimal calcCompToCompDirectTrust(Component trustor, Component trustee) {
         String trustorUid = trustor.getUid();
         String trusteeUid = trustee.getUid();
         BigDecimal directTrust;
@@ -80,7 +82,7 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
             return BigDecimal.ZERO;
         }
         //获取双方实体可用交互历史
-        List<HistoryAndWeight<ComponentHistory>> histories = ListUtil.getAvailableComponentHistory(componentHistories, staticValue.daysThreshold);
+        List<HistoryAndWeight<ComponentHistory>> histories = ListUtil.getAvailableComponentHistory(componentHistories, staticValue.DAYS_THRESHOLD);
         if (histories.size() == 0) {
             return BigDecimal.ZERO;
         }
@@ -98,7 +100,7 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
         } else {
             ProviderTrustValue providerTrustValue = providerTrustValueMapper.queryLatestByProviderUid(trustee.getParentUid());
             if (providerTrustValue == null) {
-                providerTrust = new BigDecimal(0.5);
+                providerTrust = staticValue.DEFAULT_TRUST_VALUE;
             } else {
                 providerTrust = providerTrustValue.getTrustValue();
             }
@@ -109,8 +111,7 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
         return directTrust;
     }
 
-    @Override
-    public BigDecimal calcCompToCompIndirectTrust(Component trustor, Component trustee) {
+    private BigDecimal calcCompToCompIndirectTrust(Component trustor, Component trustee) {
         String trustorUid = trustor.getUid();
         String trusteeUid = trustee.getUid();
         BigDecimal indirectTrust;
@@ -143,11 +144,11 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
             ComponentTrustValue componentToRecommenderTrust = componentTrustValueMapper.queryLatestTrustValue(trustorUid, recommenderUid);
             BigDecimal componentToRecommenderTrustValue;
             if (componentToRecommenderTrust == null) {
-                continue;
+                componentToRecommenderTrustValue = staticValue.DEFAULT_TRUST_VALUE;
             } else {
                 componentToRecommenderTrustValue = componentToRecommenderTrust.getTrustValue();
-                times++;
             }
+            times++;
             //查询推荐者所属云的信誉
             BigDecimal recommendersProviderTrust;
             Component recommender = componentMapper.selectByUid(recommenderUid);
@@ -158,7 +159,7 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
                 ProviderTrustValue providerTrustValue = providerTrustValueMapper.queryLatestByProviderUid(recommender.getParentUid());
                 //获得组件所属云的最近一次信誉值,如果该云没有信誉值，则默认为0.5
                 if (providerTrustValue == null) {
-                    recommendersProviderTrust = new BigDecimal(0.5);
+                    recommendersProviderTrust = staticValue.DEFAULT_TRUST_VALUE;
                 } else {
                     recommendersProviderTrust = providerTrustValue.getTrustValue();
                 }

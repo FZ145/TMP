@@ -33,7 +33,7 @@ public class CompToRenterTrustServiceImplTest {
         List<Component> componentList = componentMapper.selectAll();
         List<Renter> renterList = renterMapper.selectAll();
         Random random = new Random();
-        int componentRandomIndex = random.nextInt(componentList.size());
+        int componentRandomIndex =random.nextInt(componentList.size());
         int renterRandomIndex = random.nextInt(renterList.size());
         Component randomComponent = componentList.get(componentRandomIndex);
         Renter randomRenter = renterList.get(renterRandomIndex);

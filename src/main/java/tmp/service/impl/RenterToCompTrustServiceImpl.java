@@ -52,7 +52,7 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
         BigDecimal directTrust = calcRenterToCompDirectTrust(renter, component);
         BigDecimal indirectTrust = calcRenterToCompIndirectTrust(renter, component);
         // 根据交互次数分配直接信任与间接信任的权重
-        if (directTimes >= staticValue.activeTimesThreshold) {
+        if (directTimes >= staticValue.ACTIVE_TIMES_THRESHOLD) {
             overallTrust = directTrust;
         } else if (totalTimes - directTimes == 0) {
             overallTrust = directTrust;
@@ -87,7 +87,7 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
         }
         // 获取双方实体可用交互历史
         List<HistoryAndWeight<RenterHistory>> histories = ListUtil.getAvailableRenterHistory(renterHistories,
-                staticValue.daysThreshold);
+                staticValue.DAYS_THRESHOLD);
         if (histories.size() == 0) {
             return BigDecimal.ZERO;
         }
@@ -105,7 +105,7 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
         ProviderTrustValue providerTrustValue = providerTrustValueMapper
                 .queryLatestByProviderUid(component.getParentUid());
         if (providerTrustValue == null) {
-            providerTrust = new BigDecimal(0.5);
+            providerTrust = staticValue.DEFAULT_TRUST_VALUE;
         } else {
             providerTrust = providerTrustValue.getTrustValue();
         }
@@ -149,11 +149,11 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
                     recommenderUid);
             BigDecimal renterToRecommenderTrustValue;
             if (renterToRecommenderTrust == null) {
-                renterToRecommenderTrustValue = new BigDecimal(0.5);
+                renterToRecommenderTrustValue = staticValue.DEFAULT_TRUST_VALUE;
             } else {
                 renterToRecommenderTrustValue = renterToRecommenderTrust.getTrustValue();
-                times++;
             }
+            times++;
             sum = sum.add(recommenderDirectTrustValue.multiply(renterToRecommenderTrustValue));
         }
         if (times == 0) {

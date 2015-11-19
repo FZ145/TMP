@@ -52,7 +52,7 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
         BigDecimal directTrust = calcCompToRenterDirectTrust(component, renter);
         BigDecimal indirectTrust = calcCompToRenterIndirectTrust(component, renter);
         // 根据交互次数分配直接信任与间接信任的权重
-        if (directTimes >= staticValue.activeTimesThreshold) {
+        if (directTimes >= staticValue.ACTIVE_TIMES_THRESHOLD) {
             overallTrust = directTrust;
         } else if (totalTimes - directTimes == 0) {
             overallTrust = directTrust;
@@ -87,7 +87,7 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
         }
         // 获取双方实体可用交互历史
         List<HistoryAndWeight<ComponentHistory>> histories = ListUtil.getAvailableComponentHistory(componentHistories,
-                staticValue.daysThreshold);
+                staticValue.DAYS_THRESHOLD);
         if (histories.size() == 0) {
             return BigDecimal.ZERO;
         }
@@ -140,23 +140,23 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
                     .queryLatestTrustValue(componentUid, recommenderUid);
             BigDecimal componentToRecommenderTrustValue;
             if (componentToRecommenderTrust == null) {
-                continue;
+                componentToRecommenderTrustValue = staticValue.DEFAULT_TRUST_VALUE;
             } else {
                 componentToRecommenderTrustValue = componentToRecommenderTrust.getTrustValue();
-                times++;
             }
+            times++;
             // 查询推荐者所属云的信誉
             BigDecimal recommendersProviderTrust;
             Component recommender = componentMapper.selectByUid(recommenderUid);
             // 如果推荐者与请求者属于同一个云，则默认完全信任
             if (recommender.getParentUid().equals(component.getParentUid())) {
-                recommendersProviderTrust = new BigDecimal(0.5);
+                recommendersProviderTrust = staticValue.DEFAULT_TRUST_VALUE;
             } else {
                 ProviderTrustValue providerTrustValue = providerTrustValueMapper
                         .queryLatestByProviderUid(recommender.getParentUid());
                 // 获得组件所属云的最近一次信誉值,如果该云没有信誉值，则默认为0.5
                 if (providerTrustValue == null) {
-                    recommendersProviderTrust = new BigDecimal(0.5);
+                    recommendersProviderTrust = staticValue.DEFAULT_TRUST_VALUE;
                 } else {
                     recommendersProviderTrust = providerTrustValue.getTrustValue();
                 }
