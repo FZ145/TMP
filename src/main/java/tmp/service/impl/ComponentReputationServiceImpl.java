@@ -29,16 +29,17 @@ public class ComponentReputationServiceImpl implements ComponentReputationServic
     private ComponentReputationMapper componentReputationMapper;
 
     @Override
-    public void calcComponentReputation(Component component) {
-        // 查询所有用户对该组件的最新的信任值，融合获得组件层对他的信任
+    public BigDecimal calcComponentReputation(Component component) {
+        // 查询所有租户对该组件的最新的信任值，融合获得租户层对他的信任
         // 查找所有的租户
         List<Renter> renters = renterMapper.selectAll();
         int times = 0;
         BigDecimal sum = BigDecimal.ZERO;
         BigDecimal reputation;
+        //每次计算某组件的声誉都会触发所有租户层内的租户对该组件进行一次信任评估
         for (Renter renter : renters) {
             BigDecimal trust = renterToCompTrustService.calcRenterToCompTrust(renter, component);
-            if (trust != BigDecimal.ZERO) {
+            if (trust.doubleValue() != BigDecimal.ZERO.doubleValue()) {
                 times++;
                 sum = sum.add(trust);
             }
@@ -55,5 +56,6 @@ public class ComponentReputationServiceImpl implements ComponentReputationServic
         componentReputation.setCreateTime(new Date());
         componentReputation.setReputationValue(reputation);
         componentReputationMapper.insertSelective(componentReputation);
+        return reputation;
     }
 }
