@@ -154,7 +154,7 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
             Component recommender = componentMapper.selectByUid(recommenderUid);
             // 如果推荐者与请求者属于同一个云，则默认完全信任
             if (recommender.getParentUid().equals(component.getParentUid())) {
-                recommendersProviderTrust = StaticValue.DEFAULT_TRUST_VALUE;
+                recommendersProviderTrust = BigDecimal.ONE;
             } else {
                 ProviderTrustValue providerTrustValue = providerTrustValueMapper
                         .queryLatestByProviderUid(recommender.getParentUid());
