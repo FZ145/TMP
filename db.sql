@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `componenthistory` (
   `uid` varchar(50) NOT NULL,
   `trustorUid` varchar(50) NOT NULL,
   `trusteeUid` varchar(50) NOT NULL,
-  `trustValue` double NOT NULL,
+  `trustValue` decimal(5,4) NOT NULL,
   `actionTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `actionType` tinyint(4) NOT NULL DEFAULT '0' COMMENT '1表示层内交互，2表示跨层交互，0为默认',
   PRIMARY KEY (`id`),
@@ -68,7 +68,7 @@ CREATE TABLE IF NOT EXISTS `componentreputation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
   `componentUid` varchar(50) NOT NULL,
-  `reputationValue` double NOT NULL,
+  `reputationValue` decimal(5,4) NOT NULL,
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`),
@@ -88,7 +88,7 @@ CREATE TABLE IF NOT EXISTS `componenttrustvalue` (
   `uid` varchar(50) NOT NULL,
   `trustorUid` varchar(50) NOT NULL,
   `trusteeUid` varchar(50) NOT NULL,
-  `trustValue` double NOT NULL,
+  `trustValue` decimal(5,4) NOT NULL,
   `actionType` tinyint(4) NOT NULL DEFAULT '0' COMMENT '1表示层内交互，2表示跨层交互，0为默认',
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -96,7 +96,7 @@ CREATE TABLE IF NOT EXISTS `componenttrustvalue` (
   KEY `trustorUid` (`trustorUid`),
   KEY `trusteeUid` (`trusteeUid`),
   KEY `actionType` (`actionType`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='组件信任值表';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='组件信任值表';
 
 -- 正在导出表  tmp.componenttrustvalue 的数据：~0 rows (大约)
 DELETE FROM `componenttrustvalue`;
@@ -128,7 +128,7 @@ CREATE TABLE IF NOT EXISTS `providertrustvalue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
   `providerUid` varchar(50) NOT NULL,
-  `trustValue` double NOT NULL,
+  `trustValue` decimal(5,4) NOT NULL,
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`),
@@ -168,7 +168,7 @@ CREATE TABLE IF NOT EXISTS `renterhistory` (
   `uid` varchar(50) NOT NULL,
   `trustorUid` varchar(50) NOT NULL,
   `trusteeUid` varchar(50) NOT NULL,
-  `trustValue` double NOT NULL,
+  `trustValue` decimal(5,4) NOT NULL,
   `actionTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   `actionType` tinyint(4) NOT NULL DEFAULT '0' COMMENT '1表示层内交互，2表示跨层交互，0为默认',
   PRIMARY KEY (`id`),
@@ -176,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `renterhistory` (
   KEY `trustorUid` (`trustorUid`),
   KEY `trusteeUid` (`trusteeUid`),
   KEY `actionType` (`actionType`)
-) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=latin1 COMMENT='租户交互历史表，有评估方Uid与被评估方Uid';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='租户交互历史表，有评估方Uid与被评估方Uid';
 
 -- 正在导出表  tmp.renterhistory 的数据：~0 rows (大约)
 DELETE FROM `renterhistory`;
@@ -190,7 +190,7 @@ CREATE TABLE IF NOT EXISTS `renterreputation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
   `renterUid` varchar(50) NOT NULL,
-  `reputationValue` double NOT NULL,
+  `reputationValue` decimal(5,4) NOT NULL,
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`),
@@ -210,7 +210,7 @@ CREATE TABLE IF NOT EXISTS `rentertrustvalue` (
   `uid` varchar(50) NOT NULL,
   `trustorUid` varchar(50) NOT NULL,
   `trusteeUid` varchar(50) NOT NULL,
-  `trustValue` double NOT NULL,
+  `trustValue` decimal(5,4) NOT NULL,
   `actionType` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '1表示层内交互，2表示跨层交互，0为默认',
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
@@ -218,7 +218,7 @@ CREATE TABLE IF NOT EXISTS `rentertrustvalue` (
   KEY `trustorUid` (`trustorUid`),
   KEY `trusteeUid` (`trusteeUid`),
   KEY `actionType` (`actionType`)
-) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1 COMMENT='租户信任值表';
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='租户信任值表';
 
 -- 正在导出表  tmp.rentertrustvalue 的数据：~0 rows (大约)
 DELETE FROM `rentertrustvalue`;
