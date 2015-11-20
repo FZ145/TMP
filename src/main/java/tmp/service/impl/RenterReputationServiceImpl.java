@@ -38,7 +38,7 @@ public class RenterReputationServiceImpl implements RenterReputationService {
         BigDecimal reputation;
         for (Component component : components) {
             BigDecimal trust = compToRenterTrustService.calcCompToRenterTrust(component, renter);
-            if (trust != BigDecimal.ZERO) {
+            if (trust.doubleValue() != BigDecimal.ZERO.doubleValue()) {
                 times++;
                 sum = sum.add(trust);
             }
