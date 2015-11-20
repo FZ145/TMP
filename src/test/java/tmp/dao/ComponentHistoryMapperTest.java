@@ -34,6 +34,6 @@ public class ComponentHistoryMapperTest {
     public void testSelectByTrustorAndTrusteeUid() throws Exception {
         List<ComponentHistory> componentHistories = componentHistoryMapper.selectByTrustorAndTrusteeUid("component1",
                 "component2", null);
-        System.out.println(componentHistories);
+//        System.out.println(componentHistories);
     }
 }
