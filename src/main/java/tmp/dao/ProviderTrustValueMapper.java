@@ -1,9 +1,10 @@
 package tmp.dao;
 
-import org.springframework.stereotype.Repository;
-import tmp.entity.ProviderTrustValue;
-
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import tmp.entity.ProviderTrustValue;
 
 @Repository
 public interface ProviderTrustValueMapper {
@@ -20,8 +21,8 @@ public interface ProviderTrustValueMapper {
     int updateByPrimaryKey(ProviderTrustValue record);
 
     ProviderTrustValue queryLatestByProviderUid(String providerUid);
-    //查询对应云的最近20条声誉记录
-    List<ProviderTrustValue> queryReputationListByProviderUid(String providerUid);
 
+    // 查询对应云的最近20条声誉记录
+    List<ProviderTrustValue> queryReputationListByProviderUid(String providerUid);
 
 }

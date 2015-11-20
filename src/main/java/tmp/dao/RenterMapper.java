@@ -1,9 +1,10 @@
 package tmp.dao;
 
-import org.springframework.stereotype.Repository;
-import tmp.entity.Renter;
-
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import tmp.entity.Renter;
 
 @Repository
 public interface RenterMapper {

@@ -1,6 +1,11 @@
 package tmp.simDataCreator;
 
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
 import tmp.dao.ComponentMapper;
 import tmp.dao.ProviderMapper;
 import tmp.dao.RenterMapper;
@@ -10,9 +15,6 @@ import tmp.entity.Renter;
 import tmp.service.ComponentReputationService;
 import tmp.service.ProviderReputationService;
 import tmp.service.RenterReputationService;
-
-import javax.annotation.Resource;
-import java.util.List;
 
 /**
  * Created by shining.cui on 2015/11/20.

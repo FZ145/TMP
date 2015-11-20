@@ -7,6 +7,8 @@ import java.math.RoundingMode;
  * Created by shining.cui on 2015/11/6.
  */
 public class Weight {
+    private Weight() {
+    }
 
     public static BigDecimal calcDirectTrustWeight(int directTimes, int totalTimes) {
 

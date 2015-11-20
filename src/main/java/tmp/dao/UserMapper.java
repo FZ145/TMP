@@ -1,6 +1,5 @@
 package tmp.dao;
 
-
 import tmp.entity.User;
 
 public interface UserMapper {

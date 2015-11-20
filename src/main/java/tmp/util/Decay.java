@@ -1,15 +1,18 @@
 package tmp.util;
 
-import org.joda.time.DateTime;
-import org.joda.time.Days;
-
 import java.math.BigDecimal;
 import java.util.Date;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
 
 /**
  * Created by shining.cui on 2015/11/6.
  */
 public class Decay {
+    private Decay() {
+    }
+
     // 根据时间进行衰减，这里先采取简单衰减策略，以后根据实验改进
     public static BigDecimal decayByTime(Date time) {
         DateTime actionTime = new DateTime(time);

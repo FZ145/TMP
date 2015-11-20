@@ -33,10 +33,6 @@ public class Component {
 
     @Override
     public String toString() {
-        return "Component{" +
-                "id=" + id +
-                ", uid='" + uid + '\'' +
-                ", parentUid='" + parentUid + '\'' +
-                '}';
+        return "Component{" + "id=" + id + ", uid='" + uid + '\'' + ", parentUid='" + parentUid + '\'' + '}';
     }
 }

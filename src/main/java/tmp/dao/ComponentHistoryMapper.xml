@@ -1,131 +1,131 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="tmp.dao.ComponentHistoryMapper" >
-  <resultMap id="BaseResultMap" type="tmp.entity.ComponentHistory" >
-    <id column="id" property="id" jdbcType="INTEGER" />
-    <result column="uid" property="uid" jdbcType="VARCHAR" />
-    <result column="trustorUid" property="trustorUid" jdbcType="VARCHAR" />
-    <result column="trusteeUid" property="trusteeUid" jdbcType="VARCHAR" />
-    <result column="trustValue" property="trustValue" jdbcType="DECIMAL" />
-    <result column="actionTime" property="actionTime" jdbcType="TIMESTAMP" />
-    <result column="actionType" property="actionType" jdbcType="TINYINT" />
-  </resultMap>
-  <sql id="Base_Column_List" >
-    id, uid, trustorUid, trusteeUid, trustValue, actionTime, actionType
-  </sql>
-  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
-    <include refid="Base_Column_List" />
-    from componenthistory
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-
-    <select id="selectByTrustorAndTrusteeUid" resultMap="BaseResultMap"  >
+<mapper namespace="tmp.dao.ComponentHistoryMapper">
+    <resultMap id="BaseResultMap" type="tmp.entity.ComponentHistory">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="uid" property="uid" jdbcType="VARCHAR"/>
+        <result column="trustorUid" property="trustorUid" jdbcType="VARCHAR"/>
+        <result column="trusteeUid" property="trusteeUid" jdbcType="VARCHAR"/>
+        <result column="trustValue" property="trustValue" jdbcType="DECIMAL"/>
+        <result column="actionTime" property="actionTime" jdbcType="TIMESTAMP"/>
+        <result column="actionType" property="actionType" jdbcType="TINYINT"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+        id, uid, trustorUid, trusteeUid, trustValue, actionTime, actionType
+    </sql>
+    <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
+        from componenthistory
+        where id = #{id,jdbcType=INTEGER}
+    </select>
+
+    <select id="selectByTrustorAndTrusteeUid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
         from componenthistory
         where trustorUid = #{trustorUid,jdbcType=VARCHAR}
-        <if test="trusteeUid != null and trusteeUid != ''" >
+        <if test="trusteeUid != null and trusteeUid != ''">
             and trusteeUid = #{trusteeUid,jdbcType=VARCHAR}
         </if>
-        <if test="actionType != null" >
+        <if test="actionType != null">
             and actionType = #{actionType,jdbcType=TINYINT}
         </if>
     </select>
 
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
-    delete from componenthistory
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="tmp.entity.ComponentHistory" >
-    insert into componenthistory (id, uid, trustorUid,
-      trusteeUid, trustValue, actionTime,
-      actionType)
-    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{trustorUid,jdbcType=VARCHAR},
-      #{trusteeUid,jdbcType=VARCHAR}, #{trustValue,jdbcType=DECIMAL}, #{actionTime,jdbcType=TIMESTAMP},
-      #{actionType,jdbcType=TINYINT})
-  </insert>
-  <insert id="insertSelective" parameterType="tmp.entity.ComponentHistory" >
-    insert into componenthistory
-    <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        id,
-      </if>
-      <if test="uid != null" >
-        uid,
-      </if>
-      <if test="trustorUid != null" >
-        trustorUid,
-      </if>
-      <if test="trusteeUid != null" >
-        trusteeUid,
-      </if>
-      <if test="trustValue != null" >
-        trustValue,
-      </if>
-      <if test="actionTime != null" >
-        actionTime,
-      </if>
-      <if test="actionType != null" >
-        actionType,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="id != null" >
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="uid != null" >
-        #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="trustorUid != null" >
-        #{trustorUid,jdbcType=VARCHAR},
-      </if>
-      <if test="trusteeUid != null" >
-        #{trusteeUid,jdbcType=VARCHAR},
-      </if>
-      <if test="trustValue != null" >
-        #{trustValue,jdbcType=DECIMAL},
-      </if>
-      <if test="actionTime != null" >
-        #{actionTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="actionType != null" >
-        #{actionType,jdbcType=TINYINT},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="tmp.entity.ComponentHistory" >
-    update componenthistory
-    <set >
-      <if test="uid != null" >
-        uid = #{uid,jdbcType=VARCHAR},
-      </if>
-      <if test="trustorUid != null" >
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+        delete from componenthistory
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
+    <insert id="insert" parameterType="tmp.entity.ComponentHistory">
+        insert into componenthistory (id, uid, trustorUid,
+        trusteeUid, trustValue, actionTime,
+        actionType)
+        values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{trustorUid,jdbcType=VARCHAR},
+        #{trusteeUid,jdbcType=VARCHAR}, #{trustValue,jdbcType=DECIMAL}, #{actionTime,jdbcType=TIMESTAMP},
+        #{actionType,jdbcType=TINYINT})
+    </insert>
+    <insert id="insertSelective" parameterType="tmp.entity.ComponentHistory">
+        insert into componenthistory
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                id,
+            </if>
+            <if test="uid != null">
+                uid,
+            </if>
+            <if test="trustorUid != null">
+                trustorUid,
+            </if>
+            <if test="trusteeUid != null">
+                trusteeUid,
+            </if>
+            <if test="trustValue != null">
+                trustValue,
+            </if>
+            <if test="actionTime != null">
+                actionTime,
+            </if>
+            <if test="actionType != null">
+                actionType,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id != null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="uid != null">
+                #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="trustorUid != null">
+                #{trustorUid,jdbcType=VARCHAR},
+            </if>
+            <if test="trusteeUid != null">
+                #{trusteeUid,jdbcType=VARCHAR},
+            </if>
+            <if test="trustValue != null">
+                #{trustValue,jdbcType=DECIMAL},
+            </if>
+            <if test="actionTime != null">
+                #{actionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="actionType != null">
+                #{actionType,jdbcType=TINYINT},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="tmp.entity.ComponentHistory">
+        update componenthistory
+        <set>
+            <if test="uid != null">
+                uid = #{uid,jdbcType=VARCHAR},
+            </if>
+            <if test="trustorUid != null">
+                trustorUid = #{trustorUid,jdbcType=VARCHAR},
+            </if>
+            <if test="trusteeUid != null">
+                trusteeUid = #{trusteeUid,jdbcType=VARCHAR},
+            </if>
+            <if test="trustValue != null">
+                trustValue = #{trustValue,jdbcType=DECIMAL},
+            </if>
+            <if test="actionTime != null">
+                actionTime = #{actionTime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="actionType != null">
+                actionType = #{actionType,jdbcType=TINYINT},
+            </if>
+        </set>
+        where id = #{id,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="tmp.entity.ComponentHistory">
+        update componenthistory
+        set uid = #{uid,jdbcType=VARCHAR},
         trustorUid = #{trustorUid,jdbcType=VARCHAR},
-      </if>
-      <if test="trusteeUid != null" >
         trusteeUid = #{trusteeUid,jdbcType=VARCHAR},
-      </if>
-      <if test="trustValue != null" >
         trustValue = #{trustValue,jdbcType=DECIMAL},
-      </if>
-      <if test="actionTime != null" >
         actionTime = #{actionTime,jdbcType=TIMESTAMP},
-      </if>
-      <if test="actionType != null" >
-        actionType = #{actionType,jdbcType=TINYINT},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="tmp.entity.ComponentHistory" >
-    update componenthistory
-    set uid = #{uid,jdbcType=VARCHAR},
-      trustorUid = #{trustorUid,jdbcType=VARCHAR},
-      trusteeUid = #{trusteeUid,jdbcType=VARCHAR},
-      trustValue = #{trustValue,jdbcType=DECIMAL},
-      actionTime = #{actionTime,jdbcType=TIMESTAMP},
-      actionType = #{actionType,jdbcType=TINYINT}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        actionType = #{actionType,jdbcType=TINYINT}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>

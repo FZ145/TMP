@@ -76,14 +76,8 @@ public class ComponentHistory {
 
     @Override
     public String toString() {
-        return "ComponentHistory{" +
-                "id=" + id +
-                ", uid='" + uid + '\'' +
-                ", trustorUid='" + trustorUid + '\'' +
-                ", trusteeUid='" + trusteeUid + '\'' +
-                ", trustValue=" + trustValue +
-                ", actionTime=" + actionTime +
-                ", actionType=" + actionType +
-                '}';
+        return "ComponentHistory{" + "id=" + id + ", uid='" + uid + '\'' + ", trustorUid='" + trustorUid + '\''
+                + ", trusteeUid='" + trusteeUid + '\'' + ", trustValue=" + trustValue + ", actionTime=" + actionTime
+                + ", actionType=" + actionType + '}';
     }
 }

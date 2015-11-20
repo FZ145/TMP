@@ -1,6 +1,12 @@
 package tmp.simDataCreator;
 
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
 import tmp.dao.ComponentMapper;
 import tmp.dao.RenterMapper;
 import tmp.entity.Component;
@@ -9,10 +15,6 @@ import tmp.service.CompToCompTrustService;
 import tmp.service.CompToRenterTrustService;
 import tmp.service.RenterToCompTrustService;
 import tmp.service.RenterToRenterTrustService;
-
-import javax.annotation.Resource;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by shining.cui on 2015/11/19.
@@ -32,10 +34,8 @@ public class SimTrustEvaluateDataCreator {
     @Resource
     private RenterToRenterTrustService renterToRenterTrustService;
 
-
     /**
-     * 随即评估组件与租户的信任，生成评估数据插入数据库
-     * 随机评估50次
+     * 随即评估组件与租户的信任，生成评估数据插入数据库 随机评估50次
      */
 
     public void createTrustEvaluateDataBetweenRenterAndComponent(int times) {

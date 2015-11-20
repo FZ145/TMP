@@ -11,8 +11,8 @@
         <result column="actionType" property="actionType" jdbcType="TINYINT"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, uid, trustorUid, trusteeUid, trustValue, createTime ,actionType
-  </sql>
+        id, uid, trustorUid, trusteeUid, trustValue, createTime ,actionType
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -20,17 +20,18 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from rentertrustvalue
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete from rentertrustvalue
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="tmp.entity.RenterTrustValue">
-    insert into rentertrustvalue (id, uid, trustorUid,
-      trusteeUid, trustValue, actionType,createTime
-      )
-    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{trustorUid,jdbcType=VARCHAR},
-      #{trusteeUid,jdbcType=VARCHAR}, #{trustValue,jdbcType=DECIMAL},#{actionType,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}
-      )
-  </insert>
+        insert into rentertrustvalue (id, uid, trustorUid,
+        trusteeUid, trustValue, actionType,createTime
+        )
+        values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR}, #{trustorUid,jdbcType=VARCHAR},
+        #{trusteeUid,jdbcType=VARCHAR}, #{trustValue,jdbcType=DECIMAL},#{actionType,jdbcType=INTEGER},
+        #{createTime,jdbcType=TIMESTAMP}
+        )
+    </insert>
     <insert id="insertSelective" parameterType="tmp.entity.RenterTrustValue">
         insert into rentertrustvalue
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -102,14 +103,14 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="tmp.entity.RenterTrustValue">
-    update rentertrustvalue
-    set uid = #{uid,jdbcType=VARCHAR},
-      trustorUid = #{trustorUid,jdbcType=VARCHAR},
-      trusteeUid = #{trusteeUid,jdbcType=VARCHAR},
-      trustValue = #{trustValue,jdbcType=DECIMAL},
-      createTime = #{createTime,jdbcType=TIMESTAMP}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update rentertrustvalue
+        set uid = #{uid,jdbcType=VARCHAR},
+        trustorUid = #{trustorUid,jdbcType=VARCHAR},
+        trusteeUid = #{trusteeUid,jdbcType=VARCHAR},
+        trustValue = #{trustValue,jdbcType=DECIMAL},
+        createTime = #{createTime,jdbcType=TIMESTAMP}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 
     <select id="queryLatestTrustValue" resultMap="BaseResultMap">
         select
@@ -135,7 +136,7 @@
         <if test="trusteeUid != null and trusteeUid != ''">
             and trusteeUid = #{trusteeUid,jdbcType=VARCHAR}
         </if>
-        <if test="actionType != null" >
+        <if test="actionType != null">
             and actionType = #{actionType,jdbcType=TINYINT}
         </if>
     </select>

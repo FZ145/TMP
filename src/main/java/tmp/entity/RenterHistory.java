@@ -76,14 +76,8 @@ public class RenterHistory {
 
     @Override
     public String toString() {
-        return "RenterHistory{" +
-                "id=" + id +
-                ", uid='" + uid + '\'' +
-                ", trustorUid='" + trustorUid + '\'' +
-                ", trusteeUid='" + trusteeUid + '\'' +
-                ", trustValue=" + trustValue +
-                ", actionTime=" + actionTime +
-                ", actionType=" + actionType +
-                '}';
+        return "RenterHistory{" + "id=" + id + ", uid='" + uid + '\'' + ", trustorUid='" + trustorUid + '\''
+                + ", trusteeUid='" + trusteeUid + '\'' + ", trustValue=" + trustValue + ", actionTime=" + actionTime
+                + ", actionType=" + actionType + '}';
     }
 }

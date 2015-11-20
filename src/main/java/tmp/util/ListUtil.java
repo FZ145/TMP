@@ -1,19 +1,23 @@
 package tmp.util;
 
-import org.joda.time.DateTime;
-import org.joda.time.Days;
-import tmp.bo.HistoryAndWeight;
-import tmp.entity.ComponentHistory;
-import tmp.entity.RenterHistory;
-
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
+
+import org.joda.time.DateTime;
+import org.joda.time.Days;
+
+import tmp.bo.HistoryAndWeight;
+import tmp.entity.ComponentHistory;
+import tmp.entity.RenterHistory;
 
 /**
  * Created by shining.cui on 2015/11/5.
  */
 public class ListUtil {
+    private ListUtil() {
+    }
+
     public static List<HistoryAndWeight<RenterHistory>> getAvailableRenterHistory(List<RenterHistory> tableList,
             Integer daysThreshold) {
         List<HistoryAndWeight<RenterHistory>> list = new ArrayList<HistoryAndWeight<RenterHistory>>();

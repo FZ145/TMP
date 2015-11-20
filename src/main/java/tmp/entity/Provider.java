@@ -23,9 +23,6 @@ public class Provider {
 
     @Override
     public String toString() {
-        return "Provider{" +
-                "id=" + id +
-                ", uid='" + uid + '\'' +
-                '}';
+        return "Provider{" + "id=" + id + ", uid='" + uid + '\'' + '}';
     }
 }

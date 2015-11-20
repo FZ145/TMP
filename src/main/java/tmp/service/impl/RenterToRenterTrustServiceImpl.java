@@ -1,6 +1,15 @@
 package tmp.service.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
 import tmp.bo.HistoryAndWeight;
 import tmp.dao.RenterHistoryMapper;
 import tmp.dao.RenterTrustValueMapper;
@@ -8,19 +17,12 @@ import tmp.entity.Renter;
 import tmp.entity.RenterHistory;
 import tmp.entity.RenterTrustValue;
 import tmp.service.RenterToRenterTrustService;
-import tmp.staticValue.staticValue;
+import tmp.staticvalue.StaticValue;
 import tmp.util.ListUtil;
 import tmp.util.Weight;
 
-import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 /**
- * 计算租户与租户的信任，将结果存入rentertrustvalue表中
- * Created by shining.cui on 2015/11/6.
+ * 计算租户与租户的信任，将结果存入rentertrustvalue表中 Created by shining.cui on 2015/11/6.
  */
 @Service("renterToRenterTrustService")
 public class RenterToRenterTrustServiceImpl implements RenterToRenterTrustService {
@@ -43,10 +45,10 @@ public class RenterToRenterTrustServiceImpl implements RenterToRenterTrustServic
                 1);
         int totalTimes = renterTrustValues.size();
         // 计算直接信任与间接信任
-        BigDecimal directTrust = calcRenterToRenterDirectTrust(trustor, trustee);
-        BigDecimal indirectTrust = calcRenterToRenterIndirectTrust(trustor, trustee);
+        BigDecimal directTrust = calcDirectTrust(trustor, trustee);
+        BigDecimal indirectTrust = calcIndirectTrust(trustor, trustee);
         // 根据交互次数分配直接信任与间接信任的权重
-        if (directTimes >= staticValue.ACTIVE_TIMES_THRESHOLD) {
+        if (directTimes >= StaticValue.ACTIVE_TIMES_THRESHOLD) {
             overallTrust = directTrust;
         } else if (totalTimes - directTimes == 0) {
             overallTrust = directTrust;
@@ -69,20 +71,20 @@ public class RenterToRenterTrustServiceImpl implements RenterToRenterTrustServic
         return overallTrust;
     }
 
-    private BigDecimal calcRenterToRenterDirectTrust(Renter trustor, Renter trustee) {
+    private BigDecimal calcDirectTrust(Renter trustor, Renter trustee) {
         String trustorUid = trustor.getUid();
         String trusteeUid = trustee.getUid();
         BigDecimal directTrust;
         // 获取双方实体所有交互历史
         List<RenterHistory> renterHistories = renterHistoryMapper.selectByTrustorAndTrusteeUid(trustorUid, trusteeUid,
                 null);
-        if (renterHistories.size() == 0) {
+        if (CollectionUtils.isEmpty(renterHistories)) {
             return BigDecimal.ZERO;
         }
         // 获取双方实体可用交互历史
         List<HistoryAndWeight<RenterHistory>> histories = ListUtil.getAvailableRenterHistory(renterHistories,
-                staticValue.DAYS_THRESHOLD);
-        if (histories.size() == 0) {
+                StaticValue.DAYS_THRESHOLD);
+        if (CollectionUtils.isEmpty(histories)) {
             return BigDecimal.ZERO;
         }
         int times = histories.size();
@@ -98,7 +100,7 @@ public class RenterToRenterTrustServiceImpl implements RenterToRenterTrustServic
         return directTrust;
     }
 
-    private BigDecimal calcRenterToRenterIndirectTrust(Renter trustor, Renter trustee) {
+    private BigDecimal calcIndirectTrust(Renter trustor, Renter trustee) {
         String trustorUid = trustor.getUid();
         String trusteeUid = trustee.getUid();
         BigDecimal indirectTrust;
@@ -117,7 +119,7 @@ public class RenterToRenterTrustServiceImpl implements RenterToRenterTrustServic
             }
         }
         // 若果没有推荐人，则无推荐信任
-        if (recommenders.size() == 0) {
+        if (CollectionUtils.isEmpty(recommenders)) {
             return BigDecimal.ZERO;
         }
         BigDecimal sum = BigDecimal.ZERO;
@@ -134,7 +136,7 @@ public class RenterToRenterTrustServiceImpl implements RenterToRenterTrustServic
                     recommenderUid);
             BigDecimal renterToRecommenderTrustValue;
             if (renterToRecommenderTrust == null) {
-                renterToRecommenderTrustValue = staticValue.DEFAULT_TRUST_VALUE;
+                renterToRecommenderTrustValue = StaticValue.DEFAULT_TRUST_VALUE;
             } else {
                 renterToRecommenderTrustValue = renterToRecommenderTrust.getTrustValue();
             }

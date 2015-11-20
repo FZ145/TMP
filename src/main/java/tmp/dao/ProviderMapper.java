@@ -1,9 +1,10 @@
 package tmp.dao;
 
-import org.springframework.stereotype.Repository;
-import tmp.entity.Provider;
-
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import tmp.entity.Provider;
 
 @Repository
 public interface ProviderMapper {

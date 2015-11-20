@@ -1,6 +1,15 @@
 package tmp.service.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
 import tmp.bo.HistoryAndWeight;
 import tmp.dao.ProviderTrustValueMapper;
 import tmp.dao.RenterHistoryMapper;
@@ -11,20 +20,12 @@ import tmp.entity.Renter;
 import tmp.entity.RenterHistory;
 import tmp.entity.RenterTrustValue;
 import tmp.service.RenterToCompTrustService;
-import tmp.staticValue.staticValue;
+import tmp.staticvalue.StaticValue;
 import tmp.util.ListUtil;
 import tmp.util.Weight;
 
-import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 /**
- * 计算租户与组件的信任，将综合信任评估结果存入数据库rentertrustvalue中
- * Created by shining.cui on 2015/11/6.
- * 测试基本完成，
+ * 计算租户与组件的信任，将综合信任评估结果存入数据库rentertrustvalue中 Created by shining.cui on 2015/11/6. 测试基本完成，
  */
 @Service("renterToCompTrustService")
 public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
@@ -49,10 +50,10 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
                 componentUid, 2);
         int totalTimes = otherTrustValues.size();
         // 计算直接信任与间接信任
-        BigDecimal directTrust = calcRenterToCompDirectTrust(renter, component);
-        BigDecimal indirectTrust = calcRenterToCompIndirectTrust(renter, component);
+        BigDecimal directTrust = calcDirectTrust(renter, component);
+        BigDecimal indirectTrust = calcIndirectTrust(renter, component);
         // 根据交互次数分配直接信任与间接信任的权重
-        if (directTimes >= staticValue.ACTIVE_TIMES_THRESHOLD) {
+        if (directTimes >= StaticValue.ACTIVE_TIMES_THRESHOLD) {
             overallTrust = directTrust;
         } else if (totalTimes - directTimes == 0) {
             overallTrust = directTrust;
@@ -75,20 +76,20 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
         return overallTrust;
     }
 
-    private BigDecimal calcRenterToCompDirectTrust(Renter renter, Component component) {
+    private BigDecimal calcDirectTrust(Renter renter, Component component) {
         String componentUid = component.getUid();
         String renterUid = renter.getUid();
         BigDecimal directTrust;
         // 获取双方实体所有交互历史
         List<RenterHistory> renterHistories = renterHistoryMapper.selectByTrustorAndTrusteeUid(renterUid, componentUid,
                 null);
-        if (renterHistories.size() == 0) {
+        if (CollectionUtils.isEmpty(renterHistories)) {
             return BigDecimal.ZERO;
         }
         // 获取双方实体可用交互历史
         List<HistoryAndWeight<RenterHistory>> histories = ListUtil.getAvailableRenterHistory(renterHistories,
-                staticValue.DAYS_THRESHOLD);
-        if (histories.size() == 0) {
+                StaticValue.DAYS_THRESHOLD);
+        if (CollectionUtils.isEmpty(histories)) {
             return BigDecimal.ZERO;
         }
         int times = histories.size();
@@ -105,7 +106,7 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
         ProviderTrustValue providerTrustValue = providerTrustValueMapper
                 .queryLatestByProviderUid(component.getParentUid());
         if (providerTrustValue == null) {
-            providerTrust = staticValue.DEFAULT_TRUST_VALUE;
+            providerTrust = StaticValue.DEFAULT_TRUST_VALUE;
         } else {
             providerTrust = providerTrustValue.getTrustValue();
         }
@@ -113,7 +114,7 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
         return directTrust;
     }
 
-    private BigDecimal calcRenterToCompIndirectTrust(Renter renter, Component component) {
+    private BigDecimal calcIndirectTrust(Renter renter, Component component) {
         String componentUid = component.getUid();
         String renterUid = renter.getUid();
         BigDecimal indirectTrust;
@@ -132,7 +133,7 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
             }
         }
         // 若果没有推荐人，则无推荐信任
-        if (recommenders.size() == 0) {
+        if (CollectionUtils.isEmpty(recommenders)) {
             return BigDecimal.ZERO;
         }
         BigDecimal sum = BigDecimal.ZERO;
@@ -149,7 +150,7 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
                     recommenderUid);
             BigDecimal renterToRecommenderTrustValue;
             if (renterToRecommenderTrust == null) {
-                renterToRecommenderTrustValue = staticValue.DEFAULT_TRUST_VALUE;
+                renterToRecommenderTrustValue = StaticValue.DEFAULT_TRUST_VALUE;
             } else {
                 renterToRecommenderTrustValue = renterToRecommenderTrust.getTrustValue();
             }

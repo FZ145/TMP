@@ -1,6 +1,15 @@
 package tmp.service.impl;
 
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+import org.springframework.util.CollectionUtils;
+
 import tmp.bo.HistoryAndWeight;
 import tmp.dao.ComponentHistoryMapper;
 import tmp.dao.ComponentMapper;
@@ -12,15 +21,9 @@ import tmp.entity.ComponentTrustValue;
 import tmp.entity.ProviderTrustValue;
 import tmp.entity.Renter;
 import tmp.service.CompToRenterTrustService;
-import tmp.staticValue.staticValue;
+import tmp.staticvalue.StaticValue;
 import tmp.util.ListUtil;
 import tmp.util.Weight;
-
-import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 /**
  * * 计算组件与租户的信任，将综合信任评估结果存入数据库componentreputation中 Created by shining.cui on 2015/11/6.
@@ -46,13 +49,14 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
                 renterUid, null);
         int directTimes = trustValues.size();
         // 查询其他组件与该租户的信任评估历史次数
-        List<ComponentTrustValue> componentTrustValues = componentTrustValueMapper.selectByTrustorAndTrusteeUid(null, renterUid, 2);
+        List<ComponentTrustValue> componentTrustValues = componentTrustValueMapper.selectByTrustorAndTrusteeUid(null,
+                renterUid, 2);
         int totalTimes = componentTrustValues.size();
         // 计算直接信任与间接信任
-        BigDecimal directTrust = calcCompToRenterDirectTrust(component, renter);
-        BigDecimal indirectTrust = calcCompToRenterIndirectTrust(component, renter);
+        BigDecimal directTrust = calcDirectTrust(component, renter);
+        BigDecimal indirectTrust = calcIndirectTrust(component, renter);
         // 根据交互次数分配直接信任与间接信任的权重
-        if (directTimes >= staticValue.ACTIVE_TIMES_THRESHOLD) {
+        if (directTimes >= StaticValue.ACTIVE_TIMES_THRESHOLD) {
             overallTrust = directTrust;
         } else if (totalTimes - directTimes == 0) {
             overallTrust = directTrust;
@@ -75,20 +79,20 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
         return overallTrust;
     }
 
-    private BigDecimal calcCompToRenterDirectTrust(Component component, Renter renter) {
+    private BigDecimal calcDirectTrust(Component component, Renter renter) {
         String componentUid = component.getUid();
         String renterUid = renter.getUid();
         BigDecimal directTrust;
         // 获取双方实体所有交互历史
         List<ComponentHistory> componentHistories = componentHistoryMapper.selectByTrustorAndTrusteeUid(componentUid,
                 renterUid, null);
-        if (componentHistories.size() == 0) {
+        if (CollectionUtils.isEmpty(componentHistories)) {
             return BigDecimal.ZERO;
         }
         // 获取双方实体可用交互历史
         List<HistoryAndWeight<ComponentHistory>> histories = ListUtil.getAvailableComponentHistory(componentHistories,
-                staticValue.DAYS_THRESHOLD);
-        if (histories.size() == 0) {
+                StaticValue.DAYS_THRESHOLD);
+        if (CollectionUtils.isEmpty(histories)) {
             return BigDecimal.ZERO;
         }
         BigDecimal sum = BigDecimal.ZERO;
@@ -104,13 +108,13 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
         return directTrust;
     }
 
-    private BigDecimal calcCompToRenterIndirectTrust(Component component, Renter renter) {
+    private BigDecimal calcIndirectTrust(Component component, Renter renter) {
         String componentUid = component.getUid();
         String renterUid = renter.getUid();
         BigDecimal indirectTrust;
         // 查询与该租户有直接信任的组件，作为推荐组件
         List<ComponentTrustValue> componentTrustValues = componentTrustValueMapper.selectByTrustorAndTrusteeUid(null,
-                renterUid,2);
+                renterUid, 2);
         // 获得推荐人名单，去重，去自身
         List<String> recommenders = new ArrayList<String>();
         for (ComponentTrustValue trustValues : componentTrustValues) {
@@ -123,7 +127,7 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
             }
         }
         // 若果没有推荐人，则无推荐信任
-        if (recommenders.size() == 0) {
+        if (CollectionUtils.isEmpty(recommenders)) {
             return BigDecimal.ZERO;
         }
         BigDecimal sum = BigDecimal.ZERO;
@@ -140,7 +144,7 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
                     .queryLatestTrustValue(componentUid, recommenderUid);
             BigDecimal componentToRecommenderTrustValue;
             if (componentToRecommenderTrust == null) {
-                componentToRecommenderTrustValue = staticValue.DEFAULT_TRUST_VALUE;
+                componentToRecommenderTrustValue = StaticValue.DEFAULT_TRUST_VALUE;
             } else {
                 componentToRecommenderTrustValue = componentToRecommenderTrust.getTrustValue();
             }
@@ -150,13 +154,13 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
             Component recommender = componentMapper.selectByUid(recommenderUid);
             // 如果推荐者与请求者属于同一个云，则默认完全信任
             if (recommender.getParentUid().equals(component.getParentUid())) {
-                recommendersProviderTrust = staticValue.DEFAULT_TRUST_VALUE;
+                recommendersProviderTrust = StaticValue.DEFAULT_TRUST_VALUE;
             } else {
                 ProviderTrustValue providerTrustValue = providerTrustValueMapper
                         .queryLatestByProviderUid(recommender.getParentUid());
                 // 获得组件所属云的最近一次信誉值,如果该云没有信誉值，则默认为0.5
                 if (providerTrustValue == null) {
-                    recommendersProviderTrust = staticValue.DEFAULT_TRUST_VALUE;
+                    recommendersProviderTrust = StaticValue.DEFAULT_TRUST_VALUE;
                 } else {
                     recommendersProviderTrust = providerTrustValue.getTrustValue();
                 }

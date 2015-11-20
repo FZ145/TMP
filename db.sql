@@ -11,18 +11,19 @@
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 
 -- 导出 tmp 的数据库结构
+DROP DATABASE IF EXISTS `tmp`;
 CREATE DATABASE IF NOT EXISTS `tmp` /*!40100 DEFAULT CHARACTER SET latin1 */;
 USE `tmp`;
 
 
 -- 导出  表 tmp.component 结构
+DROP TABLE IF EXISTS `component`;
 CREATE TABLE IF NOT EXISTS `component` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
   `parentUid` varchar(50) NOT NULL COMMENT '组件所属云的uid',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `uid` (`uid`),
-  KEY `parentUid` (`parentUid`)
+  UNIQUE KEY `uid` (`uid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1 COMMENT='云组件表，组件是云的组成元素';
 
 -- 正在导出表  tmp.component 的数据：~6 rows (大约)
@@ -39,6 +40,7 @@ INSERT INTO `component` (`id`, `uid`, `parentUid`) VALUES
 
 
 -- 导出  表 tmp.componenthistory 结构
+DROP TABLE IF EXISTS `componenthistory`;
 CREATE TABLE IF NOT EXISTS `componenthistory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
@@ -61,6 +63,7 @@ DELETE FROM `componenthistory`;
 
 
 -- 导出  表 tmp.componentreputation 结构
+DROP TABLE IF EXISTS `componentreputation`;
 CREATE TABLE IF NOT EXISTS `componentreputation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
@@ -79,20 +82,21 @@ DELETE FROM `componentreputation`;
 
 
 -- 导出  表 tmp.componenttrustvalue 结构
+DROP TABLE IF EXISTS `componenttrustvalue`;
 CREATE TABLE IF NOT EXISTS `componenttrustvalue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
   `trustorUid` varchar(50) NOT NULL,
   `trusteeUid` varchar(50) NOT NULL,
   `trustValue` double NOT NULL,
-  `actionType` tinyint(4) NOT NULL,
+  `actionType` tinyint(4) NOT NULL DEFAULT '0' COMMENT '1表示层内交互，2表示跨层交互，0为默认',
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`),
   KEY `trustorUid` (`trustorUid`),
   KEY `trusteeUid` (`trusteeUid`),
   KEY `actionType` (`actionType`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='组件信任值表';
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1 COMMENT='组件信任值表';
 
 -- 正在导出表  tmp.componenttrustvalue 的数据：~0 rows (大约)
 DELETE FROM `componenttrustvalue`;
@@ -101,6 +105,7 @@ DELETE FROM `componenttrustvalue`;
 
 
 -- 导出  表 tmp.provider 结构
+DROP TABLE IF EXISTS `provider`;
 CREATE TABLE IF NOT EXISTS `provider` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
@@ -118,6 +123,7 @@ INSERT INTO `provider` (`id`, `uid`) VALUES
 
 
 -- 导出  表 tmp.providertrustvalue 结构
+DROP TABLE IF EXISTS `providertrustvalue`;
 CREATE TABLE IF NOT EXISTS `providertrustvalue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
@@ -136,6 +142,7 @@ DELETE FROM `providertrustvalue`;
 
 
 -- 导出  表 tmp.renter 结构
+DROP TABLE IF EXISTS `renter`;
 CREATE TABLE IF NOT EXISTS `renter` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
@@ -143,7 +150,7 @@ CREATE TABLE IF NOT EXISTS `renter` (
   UNIQUE KEY `uid` (`uid`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1 COMMENT='租户表';
 
--- 正在导出表  tmp.renter 的数据：~2 rows (大约)
+-- 正在导出表  tmp.renter 的数据：~4 rows (大约)
 DELETE FROM `renter`;
 /*!40000 ALTER TABLE `renter` DISABLE KEYS */;
 INSERT INTO `renter` (`id`, `uid`) VALUES
@@ -155,6 +162,7 @@ INSERT INTO `renter` (`id`, `uid`) VALUES
 
 
 -- 导出  表 tmp.renterhistory 结构
+DROP TABLE IF EXISTS `renterhistory`;
 CREATE TABLE IF NOT EXISTS `renterhistory` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
@@ -168,7 +176,7 @@ CREATE TABLE IF NOT EXISTS `renterhistory` (
   KEY `trustorUid` (`trustorUid`),
   KEY `trusteeUid` (`trusteeUid`),
   KEY `actionType` (`actionType`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='租户交互历史表，有评估方Uid与被评估方Uid';
+) ENGINE=InnoDB AUTO_INCREMENT=161 DEFAULT CHARSET=latin1 COMMENT='租户交互历史表，有评估方Uid与被评估方Uid';
 
 -- 正在导出表  tmp.renterhistory 的数据：~0 rows (大约)
 DELETE FROM `renterhistory`;
@@ -177,6 +185,7 @@ DELETE FROM `renterhistory`;
 
 
 -- 导出  表 tmp.renterreputation 结构
+DROP TABLE IF EXISTS `renterreputation`;
 CREATE TABLE IF NOT EXISTS `renterreputation` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
@@ -195,20 +204,21 @@ DELETE FROM `renterreputation`;
 
 
 -- 导出  表 tmp.rentertrustvalue 结构
+DROP TABLE IF EXISTS `rentertrustvalue`;
 CREATE TABLE IF NOT EXISTS `rentertrustvalue` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `uid` varchar(50) NOT NULL,
   `trustorUid` varchar(50) NOT NULL,
   `trusteeUid` varchar(50) NOT NULL,
   `trustValue` double NOT NULL,
-  `actionType` tinyint(4) NOT NULL,
+  `actionType` tinyint(4) unsigned NOT NULL DEFAULT '0' COMMENT '1表示层内交互，2表示跨层交互，0为默认',
   `createTime` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `uid` (`uid`),
   KEY `trustorUid` (`trustorUid`),
   KEY `trusteeUid` (`trusteeUid`),
   KEY `actionType` (`actionType`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='租户信任值表';
+) ENGINE=InnoDB AUTO_INCREMENT=50 DEFAULT CHARSET=latin1 COMMENT='租户信任值表';
 
 -- 正在导出表  tmp.rentertrustvalue 的数据：~0 rows (大约)
 DELETE FROM `rentertrustvalue`;
@@ -217,6 +227,7 @@ DELETE FROM `rentertrustvalue`;
 
 
 -- 导出  表 tmp.user_t 结构
+DROP TABLE IF EXISTS `user_t`;
 CREATE TABLE IF NOT EXISTS `user_t` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `user_name` varchar(40) NOT NULL,
@@ -225,7 +236,7 @@ CREATE TABLE IF NOT EXISTS `user_t` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 
--- 正在导出表  tmp.user_t 的数据：~0 rows (大约)
+-- 正在导出表  tmp.user_t 的数据：~2 rows (大约)
 DELETE FROM `user_t`;
 /*!40000 ALTER TABLE `user_t` DISABLE KEYS */;
 INSERT INTO `user_t` (`id`, `user_name`, `password`, `age`) VALUES

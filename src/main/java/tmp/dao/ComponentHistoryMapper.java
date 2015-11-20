@@ -1,10 +1,12 @@
 package tmp.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
+
 import tmp.entity.ComponentHistory;
 
-import java.util.List;
 @Repository
 public interface ComponentHistoryMapper {
     int deleteByPrimaryKey(Integer id);
@@ -19,7 +21,6 @@ public interface ComponentHistoryMapper {
 
     int updateByPrimaryKey(ComponentHistory record);
 
-    List<ComponentHistory> selectByTrustorAndTrusteeUid(@Param(value="trustorUid")String trustorUid,
-                                                        @Param(value="trusteeUid")String trusteeUid,
-                                                        @Param(value="actionType")Integer actionType);
+    List<ComponentHistory> selectByTrustorAndTrusteeUid(@Param(value = "trustorUid") String trustorUid,
+            @Param(value = "trusteeUid") String trusteeUid, @Param(value = "actionType") Integer actionType);
 }

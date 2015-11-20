@@ -1,9 +1,10 @@
 package tmp.dao;
 
-import org.springframework.stereotype.Repository;
-import tmp.entity.RenterReputation;
-
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import tmp.entity.RenterReputation;
 
 @Repository
 public interface RenterReputationMapper {
@@ -19,6 +20,6 @@ public interface RenterReputationMapper {
 
     int updateByPrimaryKey(RenterReputation record);
 
-    //查询对应租户的最近20条声誉记录
+    // 查询对应租户的最近20条声誉记录
     List<RenterReputation> queryReputationListByRenterUid(String renterUid);
 }

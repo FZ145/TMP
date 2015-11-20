@@ -1,6 +1,14 @@
 package tmp.simDataCreator;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+import java.util.Random;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
 import tmp.dao.ComponentHistoryMapper;
 import tmp.dao.ComponentMapper;
 import tmp.dao.RenterHistoryMapper;
@@ -9,12 +17,6 @@ import tmp.entity.Component;
 import tmp.entity.ComponentHistory;
 import tmp.entity.Renter;
 import tmp.entity.RenterHistory;
-
-import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
 
 /**
  * Created by shining.cui on 2015/11/19.

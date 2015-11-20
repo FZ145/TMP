@@ -1,9 +1,10 @@
 package tmp.dao;
 
-import org.springframework.stereotype.Repository;
-import tmp.entity.Component;
-
 import java.util.List;
+
+import org.springframework.stereotype.Repository;
+
+import tmp.entity.Component;
 
 @Repository
 public interface ComponentMapper {
@@ -19,7 +20,7 @@ public interface ComponentMapper {
 
     int updateByPrimaryKey(Component record);
 
-    Component selectByUid(String Uid);
+    Component selectByUid(String uid);
 
     List<Component> selectByParentUid(String parentUid);
 

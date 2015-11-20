@@ -38,7 +38,6 @@ public class ProviderTrustValue {
         this.providerUid = providerUid == null ? null : providerUid.trim();
     }
 
-
     public BigDecimal getTrustValue() {
         return trustValue;
     }
@@ -57,12 +56,7 @@ public class ProviderTrustValue {
 
     @Override
     public String toString() {
-        return "ProviderTrustValue{" +
-                "id=" + id +
-                ", uid='" + uid + '\'' +
-                ", providerUid='" + providerUid + '\'' +
-                ", trustValue=" + trustValue +
-                ", createTime=" + createTime +
-                '}';
+        return "ProviderTrustValue{" + "id=" + id + ", uid='" + uid + '\'' + ", providerUid='" + providerUid + '\''
+                + ", trustValue=" + trustValue + ", createTime=" + createTime + '}';
     }
 }

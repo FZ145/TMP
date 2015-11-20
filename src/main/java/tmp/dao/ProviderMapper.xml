@@ -6,8 +6,8 @@
         <result column="uid" property="uid" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, uid
-  </sql>
+        id, uid
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -15,13 +15,13 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from provider
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete from provider
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="tmp.entity.Provider">
-    insert into provider (id, uid)
-    values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR})
-  </insert>
+        insert into provider (id, uid)
+        values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR})
+    </insert>
     <insert id="insertSelective" parameterType="tmp.entity.Provider">
         insert into provider
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -51,10 +51,10 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="tmp.entity.Provider">
-    update provider
-    set uid = #{uid,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update provider
+        set uid = #{uid,jdbcType=VARCHAR}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
     <select id="selectAll" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>

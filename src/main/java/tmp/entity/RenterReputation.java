@@ -56,12 +56,7 @@ public class RenterReputation {
 
     @Override
     public String toString() {
-        return "RenterReputation{" +
-                "id=" + id +
-                ", uid='" + uid + '\'' +
-                ", renterUid='" + renterUid + '\'' +
-                ", reputationValue=" + reputationValue +
-                ", createTime=" + createTime +
-                '}';
+        return "RenterReputation{" + "id=" + id + ", uid='" + uid + '\'' + ", renterUid='" + renterUid + '\''
+                + ", reputationValue=" + reputationValue + ", createTime=" + createTime + '}';
     }
 }

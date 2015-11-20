@@ -1,6 +1,13 @@
 package tmp.service.impl;
 
+import java.math.BigDecimal;
+import java.util.Date;
+import java.util.List;
+
+import javax.annotation.Resource;
+
 import org.springframework.stereotype.Service;
+
 import tmp.dao.ComponentMapper;
 import tmp.dao.RenterReputationMapper;
 import tmp.entity.Component;
@@ -9,14 +16,8 @@ import tmp.entity.RenterReputation;
 import tmp.service.CompToRenterTrustService;
 import tmp.service.RenterReputationService;
 
-import javax.annotation.Resource;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.List;
-
 /**
- * Created by shining.cui on 2015/11/15.
- * 查询所有组件对该租户的信任，加权平均获得该组件此时的声誉，该任务定时触发
+ * Created by shining.cui on 2015/11/15. 查询所有组件对该租户的信任，加权平均获得该组件此时的声誉，该任务定时触发
  */
 @Service("renterReputationService")
 public class RenterReputationServiceImpl implements RenterReputationService {
@@ -26,10 +27,11 @@ public class RenterReputationServiceImpl implements RenterReputationService {
     private CompToRenterTrustService compToRenterTrustService;
     @Resource
     private RenterReputationMapper renterReputationMapper;
+
     @Override
     public void calcRenterReputation(Renter renter) {
-        //查询所有组件对该租户的最新的信任值，融合获得组件层对他的信任
-        //查找所有的组件
+        // 查询所有组件对该租户的最新的信任值，融合获得组件层对他的信任
+        // 查找所有的组件
         List<Component> components = componentMapper.selectAll();
         int times = 0;
         BigDecimal sum = BigDecimal.ZERO;

@@ -56,12 +56,7 @@ public class ComponentReputation {
 
     @Override
     public String toString() {
-        return "ComponentReputation{" +
-                "id=" + id +
-                ", uid='" + uid + '\'' +
-                ", componentUid='" + componentUid + '\'' +
-                ", reputationValue=" + reputationValue +
-                ", createTime=" + createTime +
-                '}';
+        return "ComponentReputation{" + "id=" + id + ", uid='" + uid + '\'' + ", componentUid='" + componentUid + '\''
+                + ", reputationValue=" + reputationValue + ", createTime=" + createTime + '}';
     }
 }

@@ -28,9 +28,6 @@ public class HistoryAndWeight<T> {
 
     @Override
     public String toString() {
-        return "HistoryAndWeight{" +
-                "history=" + history +
-                ", weight=" + weight +
-                '}';
+        return "HistoryAndWeight{" + "history=" + history + ", weight=" + weight + '}';
     }
 }

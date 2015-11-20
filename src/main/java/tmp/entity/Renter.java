@@ -23,9 +23,6 @@ public class Renter {
 
     @Override
     public String toString() {
-        return "Renter{" +
-                "id=" + id +
-                ", uid='" + uid + '\'' +
-                '}';
+        return "Renter{" + "id=" + id + ", uid='" + uid + '\'' + '}';
     }
 }

@@ -8,8 +8,8 @@
         <result column="age" property="age" jdbcType="INTEGER"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, user_name, password, age
-  </sql>
+        id, user_name, password, age
+    </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -17,15 +17,15 @@
         where id = #{id,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user_t
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+        delete from user_t
+        where id = #{id,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="tmp.entity.User">
-    insert into user_t (id, user_name, password, 
-      age)
-    values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{age,jdbcType=INTEGER})
-  </insert>
+        insert into user_t (id, user_name, password,
+        age)
+        values (#{id,jdbcType=INTEGER}, #{userName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR},
+        #{age,jdbcType=INTEGER})
+    </insert>
     <insert id="insertSelective" parameterType="tmp.entity.User">
         insert into user_t
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -73,10 +73,10 @@
         where id = #{id,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="tmp.entity.User">
-    update user_t
-    set user_name = #{userName,jdbcType=VARCHAR},
-      password = #{password,jdbcType=VARCHAR},
-      age = #{age,jdbcType=INTEGER}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+        update user_t
+        set user_name = #{userName,jdbcType=VARCHAR},
+        password = #{password,jdbcType=VARCHAR},
+        age = #{age,jdbcType=INTEGER}
+        where id = #{id,jdbcType=INTEGER}
+    </update>
 </mapper>
