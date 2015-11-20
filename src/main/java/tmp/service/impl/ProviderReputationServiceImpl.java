@@ -17,6 +17,7 @@ import tmp.entity.ProviderTrustValue;
 import tmp.service.ComponentReputationService;
 import tmp.service.ProviderReputationService;
 import tmp.service.RenterToCompTrustService;
+import tmp.staticvalue.StaticValue;
 
 /**
  * Created by shining.cui on 2015/11/7.
@@ -53,11 +54,14 @@ public class ProviderReputationServiceImpl implements ProviderReputationService 
             reputation = sum.divide(new BigDecimal(times), 4, BigDecimal.ROUND_HALF_UP);
         }
         // 将声誉评估结果存入数据库
+        if (reputation.doubleValue() < 0.8 && reputation.doubleValue() > 1.2) {
+            reputation = StaticValue.DEFAULT_PROVIDER_TRUST_VALUE;
+        }
         ProviderTrustValue providerTrustValue = new ProviderTrustValue();
         providerTrustValue.setUid("" + new Date().getTime() + providerUid);
         providerTrustValue.setCreatetime(new Date());
         providerTrustValue.setProviderUid(providerUid);
-        providerTrustValue.setTrustValue(reputation);
+        providerTrustValue.setTrustValue(reputation.add(new BigDecimal(0.35)));
         providerTrustValueMapper.insertSelective(providerTrustValue);
     }
 }

@@ -109,7 +109,7 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
             ProviderTrustValue providerTrustValue = providerTrustValueMapper
                     .queryLatestByProviderUid(trustee.getParentUid());
             if (providerTrustValue == null) {
-                providerTrust = StaticValue.DEFAULT_TRUST_VALUE;
+                providerTrust = StaticValue.DEFAULT_PROVIDER_TRUST_VALUE;
             } else {
                 providerTrust = providerTrustValue.getTrustValue();
             }
@@ -172,7 +172,7 @@ public class CompToCompTrustServiceImpl implements CompToCompTrustService {
                         .queryLatestByProviderUid(recommender.getParentUid());
                 // 获得组件所属云的最近一次信誉值,如果该云没有信誉值，则默认为0.5
                 if (providerTrustValue == null) {
-                    recommendersProviderTrust = StaticValue.DEFAULT_TRUST_VALUE;
+                    recommendersProviderTrust = StaticValue.DEFAULT_PROVIDER_TRUST_VALUE;
                 } else {
                     recommendersProviderTrust = providerTrustValue.getTrustValue();
                 }

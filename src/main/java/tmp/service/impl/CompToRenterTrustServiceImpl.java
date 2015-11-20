@@ -160,7 +160,7 @@ public class CompToRenterTrustServiceImpl implements CompToRenterTrustService {
                         .queryLatestByProviderUid(recommender.getParentUid());
                 // 获得组件所属云的最近一次信誉值,如果该云没有信誉值，则默认为0.5
                 if (providerTrustValue == null) {
-                    recommendersProviderTrust = StaticValue.DEFAULT_TRUST_VALUE;
+                    recommendersProviderTrust = StaticValue.DEFAULT_PROVIDER_TRUST_VALUE;
                 } else {
                     recommendersProviderTrust = providerTrustValue.getTrustValue();
                 }

@@ -106,7 +106,7 @@ public class RenterToCompTrustServiceImpl implements RenterToCompTrustService {
         ProviderTrustValue providerTrustValue = providerTrustValueMapper
                 .queryLatestByProviderUid(component.getParentUid());
         if (providerTrustValue == null) {
-            providerTrust = StaticValue.DEFAULT_TRUST_VALUE;
+            providerTrust = StaticValue.DEFAULT_PROVIDER_TRUST_VALUE;
         } else {
             providerTrust = providerTrustValue.getTrustValue();
         }
