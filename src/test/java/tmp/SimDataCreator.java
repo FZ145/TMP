@@ -4,6 +4,8 @@ import javax.annotation.Resource;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -17,6 +19,7 @@ import tmp.simDataCreator.SimTrustEvaluateDataCreator;
 @RunWith(SpringJUnit4ClassRunner.class) // 表示继承了SpringJUnit4ClassRunner类
 @ContextConfiguration(locations = { "classpath:spring-mybatis.xml" })
 public class SimDataCreator {
+    private static final Logger logger = LoggerFactory.getLogger(SimDataCreator.class);
     @Resource
     private SimHistoryDataCreator simHistoryDataCreator;
     @Resource
@@ -64,8 +67,7 @@ public class SimDataCreator {
         simReputationDataCreator.createReputationDataOfComponents();
 
         long endTime = System.currentTimeMillis();
-
-        System.out.println("=======================一共耗时:" + (endTime - beginTime) + "毫秒===========================");
+        logger.info("=======================一共耗时:{}毫秒===========================",endTime - beginTime);
 
     }
 
