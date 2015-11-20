@@ -34,13 +34,13 @@ public class ComponentTrustValueMapperTest {
     public void testSelectByTrustorAndTrusteeUid() throws Exception {
         List<ComponentTrustValue> componentTrustValues = componentTrustValueMapper.selectByTrustorAndTrusteeUid(null,
                 "component3", null);
-        System.out.println(componentTrustValues);
+//        System.out.println(componentTrustValues);
     }
 
     @Test
     public void testQueryLatestTrustValue() throws Exception {
         ComponentTrustValue componentTrustValue = componentTrustValueMapper.queryLatestTrustValue("component1",
                 "component3");
-        System.out.println(componentTrustValue);
+//        System.out.println(componentTrustValue);
     }
 }
