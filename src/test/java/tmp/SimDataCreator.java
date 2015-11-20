@@ -63,11 +63,11 @@ public class SimDataCreator {
         simReputationDataCreator.createReputationDataOfProviders();
         // 计算所有租户的声誉，存入数据库
         simReputationDataCreator.createReputationDataOfRenters();
-        // 计算所有组件的声誉，存入数据库
-        simReputationDataCreator.createReputationDataOfComponents();
+        // 计算所有组件的声誉，存入数据库，,云声誉已经触发了组件声誉，所以这里不用了
+        // simReputationDataCreator.createReputationDataOfComponents();
 
         long endTime = System.currentTimeMillis();
-        logger.info("=======================一共耗时:{}毫秒===========================",endTime - beginTime);
+        logger.info("=======================一共耗时:{}毫秒===========================", endTime - beginTime);
 
     }
 
