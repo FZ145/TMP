@@ -1,4 +1,4 @@
-package tmp.simDataCreator;
+package tmp.simdata;
 
 import java.util.List;
 

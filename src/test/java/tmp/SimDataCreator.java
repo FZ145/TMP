@@ -9,9 +9,9 @@ import org.slf4j.LoggerFactory;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import tmp.simDataCreator.SimHistoryDataCreator;
-import tmp.simDataCreator.SimReputationDataCreator;
-import tmp.simDataCreator.SimTrustEvaluateDataCreator;
+import tmp.simdata.SimHistoryDataCreator;
+import tmp.simdata.SimReputationDataCreator;
+import tmp.simdata.SimTrustEvaluateDataCreator;
 
 /**
  * Created by shining.cui on 2015/11/20.
@@ -31,7 +31,7 @@ public class SimDataCreator {
      * 此方法为系统初始化或者系统测试时第一个运行的方法，跑这个单元测试就可以生成随机测试数据， 测试数据保证都可以正确关联，可以正常展示所有功能。
      * 测试数据是模拟实体间进行交互的，并且交互后进行行为信任记录，从而获取直接信任与间接信任， 最终形成各个实体的声誉值。
      *
-     * 由于数据是采用随机数的原理模拟的，因此直供展示功能用，应用本web程序后数据都是真实获取。 所以tmp.simDataCreator包内的类在上线以后均不再使用。
+     * 由于数据是采用随机数的原理模拟的，因此直供展示功能用，应用本web程序后数据都是真实获取。 所以tmp.simdata包内的类在上线以后均不再使用。
      */
     @Test
     public void createSimData() {

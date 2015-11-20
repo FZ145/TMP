@@ -1,4 +1,4 @@
-package tmp.simDataCreator;
+package tmp.simdata;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -51,7 +51,7 @@ public class SimHistoryDataCreator {
             componentHistory.setTrustorUid(randomComponentUid);
             componentHistory.setTrusteeUid(randomRenterUid);
             componentHistory.setUid("" + System.currentTimeMillis() + randomComponentUid);
-            double randomDouble = random.nextDouble();
+            double randomDouble = random.nextDouble()*0.5 +0.5;
             BigDecimal randomTrustValue = new BigDecimal(randomDouble).setScale(3, BigDecimal.ROUND_HALF_UP);
             componentHistory.setTrustValue(randomTrustValue);
             componentHistoryMapper.insertSelective(componentHistory);
@@ -62,7 +62,7 @@ public class SimHistoryDataCreator {
             renterHistory.setTrusteeUid(randomComponentUid);
             renterHistory.setActionType(2);
             renterHistory.setActionTime(new Date());
-            double randomRenterDouble = random.nextDouble();
+            double randomRenterDouble = random.nextDouble()*0.5 +0.5;
             BigDecimal randomRenterTrustValue = new BigDecimal(randomRenterDouble).setScale(3,
                     BigDecimal.ROUND_HALF_UP);
             renterHistory.setTrustValue(randomRenterTrustValue);
@@ -94,7 +94,7 @@ public class SimHistoryDataCreator {
             trustorCompoentHistory.setTrustorUid(trustorUid);
             trustorCompoentHistory.setTrusteeUid(trusteeUid);
             trustorCompoentHistory.setUid("" + System.currentTimeMillis() + trustorUid);
-            double firstTrustvalueRandom = random.nextDouble();
+            double firstTrustvalueRandom = random.nextDouble()*0.5 +0.5;
             BigDecimal trustorRandomTrustValue = new BigDecimal(firstTrustvalueRandom).setScale(3,
                     BigDecimal.ROUND_HALF_UP);
             trustorCompoentHistory.setTrustValue(trustorRandomTrustValue);
@@ -107,7 +107,7 @@ public class SimHistoryDataCreator {
             trusteeComponentHistory.setTrustorUid(trusteeUid);
             trusteeComponentHistory.setTrusteeUid(trustorUid);
             trusteeComponentHistory.setUid("" + System.currentTimeMillis() + trusteeUid);
-            double secondTrustvalueRandom = random.nextDouble();
+            double secondTrustvalueRandom = random.nextDouble()*0.5 +0.5;
             BigDecimal trusteeRandomTrustValue = new BigDecimal(secondTrustvalueRandom).setScale(3,
                     BigDecimal.ROUND_HALF_UP);
             trusteeComponentHistory.setTrustValue(trusteeRandomTrustValue);
@@ -138,7 +138,7 @@ public class SimHistoryDataCreator {
             trustorRenterHistory.setTrustorUid(trustorUid);
             trustorRenterHistory.setTrusteeUid(trusteeUid);
             trustorRenterHistory.setUid("" + System.currentTimeMillis() + trustorUid);
-            double firstTrustvalueRandom = random.nextDouble();
+            double firstTrustvalueRandom = random.nextDouble()*0.5 +0.5;
             BigDecimal trustorRandomTrustValue = new BigDecimal(firstTrustvalueRandom).setScale(3,
                     BigDecimal.ROUND_HALF_UP);
             trustorRenterHistory.setTrustValue(trustorRandomTrustValue);
@@ -151,7 +151,7 @@ public class SimHistoryDataCreator {
             trusteeRenterHistory.setTrustorUid(trusteeUid);
             trusteeRenterHistory.setTrusteeUid(trustorUid);
             trusteeRenterHistory.setUid("" + System.currentTimeMillis() + trusteeUid);
-            double secondTrustvalueRandom = random.nextDouble();
+            double secondTrustvalueRandom = random.nextDouble()*0.5 +0.5;
             BigDecimal trusteeRandomTrustValue = new BigDecimal(secondTrustvalueRandom).setScale(3,
                     BigDecimal.ROUND_HALF_UP);
             trusteeRenterHistory.setTrustValue(trusteeRandomTrustValue);
