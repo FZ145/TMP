@@ -12,6 +12,7 @@ public class StaticValue {
     public static final int ACTIVE_TIMES_THRESHOLD = 100;
     // 推荐实体与请求实体没有信任的时候，默认为0.5
     public static final BigDecimal DEFAULT_TRUST_VALUE = new BigDecimal(0.5);
+    public static final BigDecimal DEFAULT_PROVIDER_TRUST_VALUE = new BigDecimal(1);
     private StaticValue() {
     }
 }
