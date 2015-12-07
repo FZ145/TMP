@@ -36,4 +36,10 @@ public class ComponentHistoryMapperTest {
                 "component2", null);
 //        System.out.println(componentHistories);
     }
+
+    @Test
+    public void testSelectByPrimaryKey() throws Exception {
+        ComponentHistory componentHistory = componentHistoryMapper.selectByPrimaryKey(22222);
+        System.out.println(componentHistory);
+    }
 }

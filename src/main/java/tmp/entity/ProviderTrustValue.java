@@ -3,7 +3,7 @@ package tmp.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ProviderTrustValue {
+public class ProviderTrustValue extends AbstractReputation  {
     private Integer id;
 
     private String uid;

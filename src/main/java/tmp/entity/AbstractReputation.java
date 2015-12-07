@@ -3,7 +3,10 @@ package tmp.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ComponentReputation extends AbstractReputation {
+/**
+ * Created by shining.cui on 2015/12/7.
+ */
+public abstract class AbstractReputation {
     private Integer id;
 
     private String uid;
@@ -52,11 +55,5 @@ public class ComponentReputation extends AbstractReputation {
 
     public void setCreateTime(Date createTime) {
         this.createTime = createTime;
-    }
-
-    @Override
-    public String toString() {
-        return "ComponentReputation{" + "id=" + id + ", uid='" + uid + '\'' + ", componentUid='" + componentUid + '\''
-                + ", reputationValue=" + reputationValue + ", createTime=" + createTime + '}';
     }
 }
