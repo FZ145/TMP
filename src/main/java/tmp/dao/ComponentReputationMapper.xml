@@ -95,7 +95,7 @@
         <include refid="Base_Column_List"/>
         from componentreputation
         where componentUid = #{componentUid,jdbcType=VARCHAR}
-        ORDER BY createTime
+        ORDER BY id
         DESC
         limit 20
     </select>

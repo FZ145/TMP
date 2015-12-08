@@ -1,10 +1,12 @@
 package tmp.controller;
 
+import com.google.common.collect.Lists;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
+import tmp.bo.ReputationData;
 import tmp.dao.ComponentHistoryMapper;
 import tmp.dao.ComponentReputationMapper;
 import tmp.dao.ComponentTrustValueMapper;
@@ -21,6 +23,7 @@ import tmp.entity.RenterReputation;
 import tmp.entity.RenterTrustValue;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
 
 @Controller
@@ -77,17 +80,32 @@ public class QueryHistoryController {
         //如果是组件，查询组件信任
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("queryReputation");
+        List<BigDecimal> reputationList = Lists.newArrayList();
+        ReputationData reputationData = new ReputationData();
+        reputationData.setEntityUid(entityUid);
+        reputationData.setReputationType(entityType);
         if (entityType == 1) {
             List<ComponentReputation> componentReputations = componentReputationMapper.queryReputationListByComponentUid(entityUid);
-            modelAndView.addObject("reputations",componentReputations);
+            for (ComponentReputation reputation : componentReputations) {
+                BigDecimal reputationValue = reputation.getReputationValue();
+                reputationList.add(reputationValue);
+            }
         } else if (entityType == 2) {
             //  如果是租户，查询租户信任信息
             List<RenterReputation> renterReputations = renterReputationMapper.queryReputationListByRenterUid(entityUid);
-            modelAndView.addObject("reputations",renterReputations);
+            for (RenterReputation reputation : renterReputations) {
+                BigDecimal reputationValue = reputation.getReputationValue();
+                reputationList.add(reputationValue);
+            }
         }else if (entityType == 3) {
             List<ProviderTrustValue> providerTrustValues = providerTrustValueMapper.queryReputationListByProviderUid(entityUid);
-            modelAndView.addObject("reputations",providerTrustValues);
+            for (ProviderTrustValue reputation : providerTrustValues) {
+                BigDecimal reputationValue = reputation.getTrustValue();
+                reputationList.add(reputationValue);
+            }
         }
+        reputationData.setReputationList(reputationList);
+        modelAndView.addObject("reputationData",reputationData);
         return modelAndView;
     }
 }

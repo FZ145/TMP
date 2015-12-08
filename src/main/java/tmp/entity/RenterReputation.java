@@ -3,7 +3,7 @@ package tmp.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class RenterReputation extends AbstractReputation  {
+public class RenterReputation {
     private Integer id;
 
     private String uid;

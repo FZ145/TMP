@@ -17,8 +17,9 @@
 <%@ page import="org.jfree.chart.renderer.category.BarRenderer"%>
 <%@ page import="org.jfree.chart.labels.StandardCategoryItemLabelGenerator"%>
 <%@ page import="java.awt.Font"%>
-<%@ page import="java.awt.Color"%>
-<%@ page import="tmp.entity.AbstractReputation" %>
+<%@ page import="tmp.bo.ReputationData" %>
+<%@ page import="java.math.BigDecimal" %>
+<%@ page import="java.util.List" %>
 <HTML>
 <HEAD>
     <TITLE>Welcome to Jfreechart !</TITLE>
@@ -57,22 +58,34 @@
     <%--String graphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + filename;--%>
 <%--%>--%>
 <%
-    Object reputations = request.getAttribute("reputations");
-    if (reputations !=null) {
+    ReputationData reputationData = (ReputationData)request.getAttribute("reputationData");
+    if (reputationData !=null) {
         ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection());
+        String entityUid = reputationData.getEntityUid();
+        Integer reputationType = reputationData.getReputationType();
+        List<BigDecimal> reputationList = reputationData.getReputationList();
+        String reputationTypeStr="";
+        if (reputationType==1) {
+            reputationTypeStr = "组件声誉趋势图";
+        }else if (reputationType == 2) {
+            reputationTypeStr = "租户声誉趋势图";
+        } else {
+            reputationTypeStr = "云服务提供商声誉趋势图";
+        }
         //显示柱状图
         DefaultCategoryDataset mDataset = new DefaultCategoryDataset();
-        for (AbstractReputation reputation : reputations) {
-
+        int i = 1;
+        for (BigDecimal reputation : reputationList) {
+            mDataset.addValue(reputation,reputationTypeStr,i++);
         }
-        mDataset.addValue(2000, "清华大学", "本科生");
-        mDataset.addValue(1500, "清华大学", "研究生");
-        mDataset.addValue(1000, "清华大学", "博士生");
-        mDataset.addValue(900, "清华大学", "讲师");
-        mDataset.addValue(800, "清华大学", "副教授");
-        mDataset.addValue(300, "清华大学", "教授");
-        mDataset.addValue(600, "清华大学", "行政人员");
-        mDataset.addValue(400, "清华大学", "管理人员");
+//        mDataset.addValue(2000, "清华大学", "本科生");
+//        mDataset.addValue(1500, "清华大学", "研究生");
+//        mDataset.addValue(1000, "清华大学", "博士生");
+//        mDataset.addValue(900, "清华大学", "讲师");
+//        mDataset.addValue(800, "清华大学", "副教授");
+//        mDataset.addValue(300, "清华大学", "教授");
+//        mDataset.addValue(600, "清华大学", "行政人员");
+//        mDataset.addValue(400, "清华大学", "管理人员");
 
         //创建主题样式
         StandardChartTheme mChartTheme = new StandardChartTheme("CN");
@@ -86,9 +99,9 @@
         ChartFactory.setChartTheme(mChartTheme);
 
         JFreeChart mChart = ChartFactory.createBarChart3D(
-                "学校人员分布图",
-                "类型",
-                "数量",
+                reputationTypeStr,
+                "最近20次声誉",
+                "声誉值",
                 mDataset,
                 PlotOrientation.VERTICAL,
                 true,

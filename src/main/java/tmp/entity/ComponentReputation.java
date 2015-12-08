@@ -3,7 +3,7 @@ package tmp.entity;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class ComponentReputation extends AbstractReputation {
+public class ComponentReputation{
     private Integer id;
 
     private String uid;
@@ -14,28 +14,28 @@ public class ComponentReputation extends AbstractReputation {
 
     private Date createTime;
 
+    public String getComponentUid() {
+        return componentUid;
+    }
+
+    public void setComponentUid(String componentUid) {
+        this.componentUid = componentUid;
+    }
+
+    public Date getCreateTime() {
+        return createTime;
+    }
+
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
+
     public Integer getId() {
         return id;
     }
 
     public void setId(Integer id) {
         this.id = id;
-    }
-
-    public String getUid() {
-        return uid;
-    }
-
-    public void setUid(String uid) {
-        this.uid = uid == null ? null : uid.trim();
-    }
-
-    public String getComponentUid() {
-        return componentUid;
-    }
-
-    public void setComponentUid(String componentUid) {
-        this.componentUid = componentUid == null ? null : componentUid.trim();
     }
 
     public BigDecimal getReputationValue() {
@@ -46,12 +46,12 @@ public class ComponentReputation extends AbstractReputation {
         this.reputationValue = reputationValue;
     }
 
-    public Date getCreateTime() {
-        return createTime;
+    public String getUid() {
+        return uid;
     }
 
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
+    public void setUid(String uid) {
+        this.uid = uid;
     }
 
     @Override
