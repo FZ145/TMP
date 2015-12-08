@@ -21,7 +21,7 @@
 </HEAD>
 <BODY>
 <div align="center">
-    <form action="/query/queryReputation.do">
+    <form action="/query/queryReputation">
         <label>
             <select name="entityType">
                 <option value="1">×é¼þ</option>

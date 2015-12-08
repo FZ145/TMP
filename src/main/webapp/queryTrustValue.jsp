@@ -24,7 +24,7 @@
     </table>
 </div>
 <div align="center">
-    <form action="/query/queryTrustValue.do" >
+    <form action="/query/queryTrustValue" >
         <label>
             <select name="entityType">
                 <option value="1">组件</option>

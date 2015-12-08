@@ -24,7 +24,7 @@
     </table>
 </div>
 <div align="center">
-<form action="/query/queryHistory.do" >
+<form action="/query/queryHistory" >
     <label>
         <select name="entityType">
             <option value="1">组件</option>

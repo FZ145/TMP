@@ -43,7 +43,7 @@ public class QueryHistoryController {
     private RenterReputationMapper renterReputationMapper;
     @Resource
     private ProviderTrustValueMapper providerTrustValueMapper;
-    @RequestMapping("/queryHistory.do")
+    @RequestMapping("/queryHistory")
     public ModelAndView queryHistory(Integer entityType, String trustorUid,String trusteeUid,Integer actionType) {
         //如果是组件，查询组件交互历史
         ModelAndView modelAndView = new ModelAndView();
@@ -59,7 +59,7 @@ public class QueryHistoryController {
         return modelAndView;
     }
 
-    @RequestMapping("/queryTrustValue.do")
+    @RequestMapping("/queryTrustValue")
     public ModelAndView queryTrustValue(Integer entityType, String trustorUid,String trusteeUid,Integer actionType) {
         //如果是组件，查询组件信任
         ModelAndView modelAndView = new ModelAndView();
@@ -75,7 +75,7 @@ public class QueryHistoryController {
         return modelAndView;
     }
 
-    @RequestMapping("/queryReputation.do")
+    @RequestMapping("/queryReputation")
     public ModelAndView queryReputation(Integer entityType, String entityUid) {
         //如果是组件，查询组件信任
         ModelAndView modelAndView = new ModelAndView();
