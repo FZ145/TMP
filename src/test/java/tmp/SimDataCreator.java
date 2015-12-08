@@ -40,21 +40,21 @@ public class SimDataCreator {
          * 生成交互历史数据部分
          */
         // 传入参数，模拟组件之间进行N次交互，生成交互历史记录，存入数据库表
-        simHistoryDataCreator.createHistoryDataBetweenComponents(50);
+        simHistoryDataCreator.createHistoryDataBetweenComponents(20);
         // 传入参数，模拟组件与租户之间进行N次交互，生成交互历史记录，存入数据库表
-        simHistoryDataCreator.createHistoryDataBetweenRenterAndComponent(100);
+        simHistoryDataCreator.createHistoryDataBetweenRenterAndComponent(50);
         // 传入参数，模拟租户与租户之间进行N次交互，生成交互历史记录，存入数据库表
-        simHistoryDataCreator.createHistoryDataBetweenRenters(50);
+        simHistoryDataCreator.createHistoryDataBetweenRenters(20);
 
         /**
          * 根据上一步生成的交互历史数据进行实体间信任评估
          */
         // 传入参数，模拟组件之间进行N次信任评估，生成交互信任评估记录，存入数据库表
-        simTrustEvaluateDataCreator.createTrustEvaluateDataBetweenComponents(50);
+        simTrustEvaluateDataCreator.createTrustEvaluateDataBetweenComponents(20);
         // 传入参数，模拟组件与租户之间进行N次信任评估，生成交互信任评估记录，存入数据库表
-        simTrustEvaluateDataCreator.createTrustEvaluateDataBetweenRenterAndComponent(100);
+        simTrustEvaluateDataCreator.createTrustEvaluateDataBetweenRenterAndComponent(50);
         // 传入参数，模拟租户之间进行N次信任评估，生成交互信任评估记录，存入数据库表
-        simTrustEvaluateDataCreator.createTrustEvaluateDataBetweenRenters(50);
+        simTrustEvaluateDataCreator.createTrustEvaluateDataBetweenRenters(20);
 
         /**
          * 根据上一部生成的信任评估数据进行声誉计算
@@ -70,5 +70,10 @@ public class SimDataCreator {
         logger.info("=======================一共耗时:{}毫秒===========================", endTime - beginTime);
 
     }
-
+    @Test
+    public void createTotalData() {
+        for (int i = 0; i < 20; i++) {
+            createSimData();
+        }
+    }
 }

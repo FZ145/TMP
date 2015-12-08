@@ -99,17 +99,17 @@
         <include refid="Base_Column_List"/>
         from providertrustvalue
         where providerUid = #{providerUid,jdbcType=VARCHAR}
-        ORDER BY createTime
+        ORDER BY id
         DESC
         limit 1
     </select>
 
-    <select id="queryReputationListByRenterUid" resultMap="BaseResultMap">
+    <select id="queryReputationListByProviderUid" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
         from providertrustvalue
         where providerUid = #{providerUid,jdbcType=VARCHAR}
-        ORDER BY createTime
+        ORDER BY id
         DESC
         limit 20
     </select>

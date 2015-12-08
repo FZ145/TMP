@@ -119,7 +119,7 @@
         where
         trustorUid = #{trustorUid,jdbcType=VARCHAR}
         AND trusteeUid = #{trusteeUid,jdbcType=VARCHAR}
-        ORDER BY createTime
+        ORDER BY id
         DESC
         limit 1
     </select>

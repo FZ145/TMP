@@ -22,7 +22,7 @@
 <%@ page import="java.util.List" %>
 <HTML>
 <HEAD>
-    <TITLE>Welcome to Jfreechart !</TITLE>
+    <TITLE>实体声誉查询</TITLE>
 </HEAD>
 <BODY>
 <div align="center">
@@ -110,15 +110,14 @@
         CategoryPlot mPlot = (CategoryPlot)mChart.getPlot();
         CategoryAxis mDomainAxis = mPlot.getDomainAxis();
         //设置柱状图距离x轴最左端（即y轴）的距离百分比10%
-        //mDomainAxis.setLowerMargin(0.1);
-        mDomainAxis.setUpperMargin(0.1);
+//        mDomainAxis.setLowerMargin(0.1);
+//        mDomainAxis.setUpperMargin(0.1);
         //柱体显示数值
         BarRenderer mRenderer = new BarRenderer();
         mRenderer.setItemLabelGenerator(new StandardCategoryItemLabelGenerator());
-        mRenderer.setItemLabelFont(new Font("宋体", Font.PLAIN, 15));
+        mRenderer.setItemLabelFont(new Font("宋体", Font.PLAIN, 10));
         mRenderer.setItemLabelsVisible(true);
         mPlot.setRenderer(mRenderer);
-
         //500是图片长度，300是图片高度
         String filenamebar = ServletUtilities.saveChartAsPNG(mChart, 800, 500, info, session);
         String graphURLbar = request.getContextPath() + "/servlet/DisplayChart?filename=" + filenamebar;

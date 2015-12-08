@@ -96,7 +96,7 @@
         <include refid="Base_Column_List"/>
         from renterreputation
         where renterUid = #{renterUid,jdbcType=VARCHAR}
-        ORDER BY createTime
+        ORDER BY id
         DESC
         limit 20
     </select>
