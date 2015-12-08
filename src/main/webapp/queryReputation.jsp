@@ -1,23 +1,18 @@
-<%@ page contentType="text/html;charset=GBK"%>
-<%@ page import="org.jfree.data.general.DefaultPieDataset"%>
-<%@ page import="org.jfree.data.category.CategoryDataset" %>
+<%@ page contentType="text/html;charset=GBK" %>
+<%@ page import="org.jfree.chart.ChartFactory" %>
+<%@ page import="org.jfree.chart.ChartRenderingInfo" %>
+<%@ page import="org.jfree.chart.JFreeChart" %>
+<%@ page import="org.jfree.chart.StandardChartTheme" %>
+<%@ page import="org.jfree.chart.axis.CategoryAxis" %>
+<%@ page import="org.jfree.chart.entity.StandardEntityCollection" %>
+<%@ page import="org.jfree.chart.labels.StandardCategoryItemLabelGenerator" %>
+<%@ page import="org.jfree.chart.plot.CategoryPlot" %>
+<%@ page import="org.jfree.chart.plot.PlotOrientation" %>
+<%@ page import="org.jfree.chart.renderer.category.BarRenderer" %>
+<%@ page import="org.jfree.chart.servlet.ServletUtilities" %>
 <%@ page import="org.jfree.data.category.DefaultCategoryDataset" %>
-<%@ page import="org.jfree.chart.JFreeChart"%>
-<%@ page import="org.jfree.chart.plot.PiePlot"%>
-<%@ page import="org.jfree.chart.ChartRenderingInfo"%>
-<%@ page import="org.jfree.chart.servlet.ServletUtilities"%>
-<%@ page import="org.jfree.chart.urls.StandardPieURLGenerator"%>
-<%@ page import="org.jfree.chart.entity.StandardEntityCollection"%>
-<%@ page import="org.jfree.chart.encoders.SunPNGEncoderAdapter"%>
-<%@ page import="org.jfree.chart.StandardChartTheme"%>
-<%@ page import="org.jfree.chart.ChartFactory"%>
-<%@ page import="org.jfree.chart.plot.CategoryPlot"%>
-<%@ page import="org.jfree.chart.plot.PlotOrientation"%>
-<%@ page import="org.jfree.chart.axis.CategoryAxis"%>
-<%@ page import="org.jfree.chart.renderer.category.BarRenderer"%>
-<%@ page import="org.jfree.chart.labels.StandardCategoryItemLabelGenerator"%>
-<%@ page import="java.awt.Font"%>
 <%@ page import="tmp.bo.ReputationData" %>
+<%@ page import="java.awt.*" %>
 <%@ page import="java.math.BigDecimal" %>
 <%@ page import="java.util.List" %>
 <HTML>
@@ -26,7 +21,7 @@
 </HEAD>
 <BODY>
 <div align="center">
-    <form action="/query/queryReputation.do" >
+    <form action="/query/queryReputation.do">
         <label>
             <select name="entityType">
                 <option value="1">组件</option>
@@ -39,35 +34,35 @@
     </form>
 </div>
 <%--<%--%>
-    <%--//实现饼状图--%>
-    <%--DefaultPieDataset data = new DefaultPieDataset();--%>
-    <%--data.setValue("六月", 500);--%>
-    <%--data.setValue("七月", 580);--%>
-    <%--data.setValue("八月", 828);--%>
+<%--//实现饼状图--%>
+<%--DefaultPieDataset data = new DefaultPieDataset();--%>
+<%--data.setValue("六月", 500);--%>
+<%--data.setValue("七月", 580);--%>
+<%--data.setValue("八月", 828);--%>
 
-    <%--PiePlot plot = new PiePlot(data);--%>
-    <%--JFreeChart chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, true);--%>
+<%--PiePlot plot = new PiePlot(data);--%>
+<%--JFreeChart chart = new JFreeChart("", JFreeChart.DEFAULT_TITLE_FONT, plot, true);--%>
 
-    <%--chart.setBackgroundPaint(java.awt.Color.white);  //可选，设置图片背景色--%>
-    <%--chart.setTitle("Welcome to Jfreechart !"); //可选，设置图片标题--%>
+<%--chart.setBackgroundPaint(java.awt.Color.white);  //可选，设置图片背景色--%>
+<%--chart.setTitle("Welcome to Jfreechart !"); //可选，设置图片标题--%>
 
-    <%--ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection());--%>
+<%--ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection());--%>
 
-    <%--//500是图片长度，300是图片高度--%>
-    <%--String filename = ServletUtilities.saveChartAsPNG(chart, 800, 500, info, session);--%>
-    <%--String graphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + filename;--%>
+<%--//500是图片长度，300是图片高度--%>
+<%--String filename = ServletUtilities.saveChartAsPNG(chart, 800, 500, info, session);--%>
+<%--String graphURL = request.getContextPath() + "/servlet/DisplayChart?filename=" + filename;--%>
 <%--%>--%>
 <%
-    ReputationData reputationData = (ReputationData)request.getAttribute("reputationData");
-    if (reputationData !=null) {
+    ReputationData reputationData = (ReputationData) request.getAttribute("reputationData");
+    if (reputationData != null) {
         ChartRenderingInfo info = new ChartRenderingInfo(new StandardEntityCollection());
         String entityUid = reputationData.getEntityUid();
         Integer reputationType = reputationData.getReputationType();
         List<BigDecimal> reputationList = reputationData.getReputationList();
-        String reputationTypeStr="";
-        if (reputationType==1) {
+        String reputationTypeStr = "";
+        if (reputationType == 1) {
             reputationTypeStr = "组件声誉趋势图";
-        }else if (reputationType == 2) {
+        } else if (reputationType == 2) {
             reputationTypeStr = "租户声誉趋势图";
         } else {
             reputationTypeStr = "云服务提供商声誉趋势图";
@@ -76,7 +71,7 @@
         DefaultCategoryDataset mDataset = new DefaultCategoryDataset();
         int i = 1;
         for (BigDecimal reputation : reputationList) {
-            mDataset.addValue(reputation,reputationTypeStr,i++);
+            mDataset.addValue(reputation, reputationTypeStr, i++);
         }
 //        mDataset.addValue(2000, "清华大学", "本科生");
 //        mDataset.addValue(1500, "清华大学", "研究生");
@@ -100,14 +95,14 @@
 
         JFreeChart mChart = ChartFactory.createBarChart3D(
                 reputationTypeStr,
-                "最近20次声誉",
+                entityUid + "最近20次声誉",
                 "声誉值",
                 mDataset,
                 PlotOrientation.VERTICAL,
                 true,
-                true,true);
+                true, true);
         //设置内部属性
-        CategoryPlot mPlot = (CategoryPlot)mChart.getPlot();
+        CategoryPlot mPlot = (CategoryPlot) mChart.getPlot();
         CategoryAxis mDomainAxis = mPlot.getDomainAxis();
         //设置柱状图距离x轴最左端（即y轴）的距离百分比10%
 //        mDomainAxis.setLowerMargin(0.1);
@@ -126,47 +121,46 @@
 %>
 
 <%--<%--%>
-    <%--//实现折现图--%>
-    <%--DefaultCategoryDataset mDatasetline = new DefaultCategoryDataset();--%>
-    <%--mDatasetline.addValue(1, "First", "2013");--%>
-    <%--mDatasetline.addValue(3, "First", "2014");--%>
-    <%--mDatasetline.addValue(2, "First", "2015");--%>
-    <%--mDatasetline.addValue(6, "First", "2016");--%>
-    <%--mDatasetline.addValue(5, "First", "2017");--%>
-    <%--mDatasetline.addValue(12, "First", "2018");--%>
-    <%--mDatasetline.addValue(14, "Second", "2013");--%>
-    <%--mDatasetline.addValue(13, "Second", "2014");--%>
-    <%--mDatasetline.addValue(12, "Second", "2015");--%>
-    <%--mDatasetline.addValue(9, "Second", "2016");--%>
-    <%--mDatasetline.addValue(5, "Second", "2017");--%>
-    <%--mDatasetline.addValue(7, "Second", "2018");--%>
+<%--//实现折现图--%>
+<%--DefaultCategoryDataset mDatasetline = new DefaultCategoryDataset();--%>
+<%--mDatasetline.addValue(1, "First", "2013");--%>
+<%--mDatasetline.addValue(3, "First", "2014");--%>
+<%--mDatasetline.addValue(2, "First", "2015");--%>
+<%--mDatasetline.addValue(6, "First", "2016");--%>
+<%--mDatasetline.addValue(5, "First", "2017");--%>
+<%--mDatasetline.addValue(12, "First", "2018");--%>
+<%--mDatasetline.addValue(14, "Second", "2013");--%>
+<%--mDatasetline.addValue(13, "Second", "2014");--%>
+<%--mDatasetline.addValue(12, "Second", "2015");--%>
+<%--mDatasetline.addValue(9, "Second", "2016");--%>
+<%--mDatasetline.addValue(5, "Second", "2017");--%>
+<%--mDatasetline.addValue(7, "Second", "2018");--%>
 
-    <%--StandardChartTheme mChartThemeline = new StandardChartTheme("CN");--%>
-    <%--mChartThemeline.setLargeFont(new Font("黑体", Font.BOLD, 20));--%>
-    <%--mChartThemeline.setExtraLargeFont(new Font("宋体", Font.PLAIN, 15));--%>
-    <%--mChartThemeline.setRegularFont(new Font("宋体", Font.PLAIN, 15));--%>
-    <%--ChartFactory.setChartTheme(mChartThemeline);--%>
+<%--StandardChartTheme mChartThemeline = new StandardChartTheme("CN");--%>
+<%--mChartThemeline.setLargeFont(new Font("黑体", Font.BOLD, 20));--%>
+<%--mChartThemeline.setExtraLargeFont(new Font("宋体", Font.PLAIN, 15));--%>
+<%--mChartThemeline.setRegularFont(new Font("宋体", Font.PLAIN, 15));--%>
+<%--ChartFactory.setChartTheme(mChartThemeline);--%>
 
-    <%--JFreeChart mChartline = ChartFactory.createLineChart(--%>
-            <%--"折线图",--%>
-            <%--"年份",--%>
-            <%--"数量",--%>
-            <%--mDatasetline,--%>
-            <%--PlotOrientation.VERTICAL,--%>
-            <%--true,--%>
-            <%--true,--%>
-            <%--false);--%>
+<%--JFreeChart mChartline = ChartFactory.createLineChart(--%>
+<%--"折线图",--%>
+<%--"年份",--%>
+<%--"数量",--%>
+<%--mDatasetline,--%>
+<%--PlotOrientation.VERTICAL,--%>
+<%--true,--%>
+<%--true,--%>
+<%--false);--%>
 
-    <%--CategoryPlot mPlotline = (CategoryPlot)mChart.getPlot();--%>
-    <%--mPlotline.setBackgroundPaint(Color.LIGHT_GRAY);--%>
-    <%--mPlotline.setRangeGridlinePaint(Color.BLUE);//背景底部横虚线--%>
-    <%--mPlotline.setOutlinePaint(Color.RED);//边界线--%>
+<%--CategoryPlot mPlotline = (CategoryPlot)mChart.getPlot();--%>
+<%--mPlotline.setBackgroundPaint(Color.LIGHT_GRAY);--%>
+<%--mPlotline.setRangeGridlinePaint(Color.BLUE);//背景底部横虚线--%>
+<%--mPlotline.setOutlinePaint(Color.RED);//边界线--%>
 
-    <%--//500是图片长度，300是图片高度--%>
-    <%--String filenameline = ServletUtilities.saveChartAsPNG(mChartline, 800, 500, info, session);--%>
-    <%--String graphURLline = request.getContextPath() + "/servlet/DisplayChart?filename=" + filenameline;--%>
+<%--//500是图片长度，300是图片高度--%>
+<%--String filenameline = ServletUtilities.saveChartAsPNG(mChartline, 800, 500, info, session);--%>
+<%--String graphURLline = request.getContextPath() + "/servlet/DisplayChart?filename=" + filenameline;--%>
 <%--%>--%>
-
 
 
 <P ALIGN="CENTER">
