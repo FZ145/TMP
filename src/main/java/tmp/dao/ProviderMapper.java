@@ -6,6 +6,7 @@ import org.springframework.stereotype.Repository;
 
 import tmp.entity.Provider;
 
+
 @Repository
 public interface ProviderMapper {
     int deleteByPrimaryKey(Integer id);
@@ -15,6 +16,8 @@ public interface ProviderMapper {
     int insertSelective(Provider record);
 
     Provider selectByPrimaryKey(Integer id);
+
+    Provider selectByUid(String uid);
 
     int updateByPrimaryKeySelective(Provider record);
 

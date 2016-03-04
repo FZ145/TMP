@@ -15,6 +15,7 @@ public class UserServiceImpl implements IUserService {
     @Autowired(required = false)
     private UserMapper userMapper;
 
+//    根据用户的id查询用户信息
     @Override
     public User getUserById(int userId) {
         return this.userMapper.selectByPrimaryKey(userId);

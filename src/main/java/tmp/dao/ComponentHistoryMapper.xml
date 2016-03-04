@@ -28,7 +28,7 @@
         <if test="trusteeUid != null and trusteeUid != ''">
             and trusteeUid = #{trusteeUid,jdbcType=VARCHAR}
         </if>
-        <if test="actionType != null">
+        <if test="actionType=1 or actionType = 2">
             and actionType = #{actionType,jdbcType=TINYINT}
         </if>
     </select>
