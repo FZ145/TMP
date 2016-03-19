@@ -6,7 +6,7 @@
         <result column="uid" property="uid" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, uid
+        id, uid, password
     </sql>
 
     <select id="selectByUid" resultMap="BaseResultMap">

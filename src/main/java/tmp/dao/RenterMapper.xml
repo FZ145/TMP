@@ -27,17 +27,18 @@
         where id = #{id,jdbcType=INTEGER}
     </delete>
     <insert id="insert" parameterType="tmp.entity.Renter">
-        insert into renter (id, uid)
-        values (#{id,jdbcType=INTEGER}, #{uid,jdbcType=VARCHAR})
+        insert into renter ( uid,password)
+        values (#{uid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
     </insert>
     <insert id="insertSelective" parameterType="tmp.entity.Renter">
         insert into renter
         <trim prefix="(" suffix=")" suffixOverrides=",">
-            <if test="id != null">
-                id,
-            </if>
+
             <if test="uid != null">
                 uid,
+            </if>
+            <if test="password != null">
+                password,
             </if>
         </trim>
         <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -49,6 +50,8 @@
             </if>
         </trim>
     </insert>
+
+
     <update id="updateByPrimaryKeySelective" parameterType="tmp.entity.Renter">
         update renter
         <set>

@@ -23,4 +23,6 @@ public interface RenterMapper {
     int updateByPrimaryKey(Renter record);
 
     List<Renter> selectAll();
+
+    void  register();
 }

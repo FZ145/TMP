@@ -12,7 +12,7 @@ public class LoginResult<T> {
     //向前段表明是何种身份
     private String indentifyCode;
 
-    private List<T> content;
+  /*  private List<T> content;
 
     public List<T> getContent() {
         return content;
@@ -21,7 +21,7 @@ public class LoginResult<T> {
     public void setContent(List<T> content) {
         this.content = content;
     }
-
+*/
     public String getEntityId() {
         return EntityId;
     }
