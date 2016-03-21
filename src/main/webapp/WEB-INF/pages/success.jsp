@@ -6,6 +6,7 @@
 </head>
 
 <body>
-${result}
+${result}<br>
+<input type="button" value="查询" onclick="window.location.href='/user/queryHistory.do'">
 </body>
 </html>

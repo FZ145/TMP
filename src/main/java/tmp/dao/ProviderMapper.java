@@ -24,4 +24,6 @@ public interface ProviderMapper {
     int updateByPrimaryKey(Provider record);
 
     List<Provider> selectAll();
+
+    int register(Provider provider);
 }

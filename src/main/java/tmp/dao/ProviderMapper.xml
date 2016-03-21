@@ -68,4 +68,13 @@
         <include refid="Base_Column_List"/>
         from provider
     </select>
+
+
+    <insert id="register" parameterType="tmp.entity.Provider">
+        insert into provider ( uid,password)
+
+
+        values (#{uid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+
+    </insert>
 </mapper>
