@@ -4,22 +4,16 @@ import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.SessionAttributes;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import tmp.bo.LoginResult;
 import tmp.dao.ComponentMapper;
-import tmp.dao.ComponentTrustValueMapper;
 import tmp.dao.ProviderMapper;
 import tmp.dao.RenterMapper;
 import tmp.entity.Component;
-
 import tmp.entity.ComponentHistory;
 import tmp.entity.Provider;
 import tmp.entity.Renter;
-
 import tmp.service.ComponentHistoryService;
 import tmp.staticvalue.StaticValue;
 
@@ -33,8 +27,6 @@ import java.util.List;
 
 @Controller
 @RequestMapping(value = "/user")
-
-//@SessionAttributes("userName")
 public class LoginController {
     @Resource
     private ComponentMapper componentMapper;
@@ -46,17 +38,15 @@ public class LoginController {
     private ComponentHistoryService componentHistoryService;
 
 
-
-
     // 用户登录,分为三种用户，分别为provider（云），renter（租户），component（组件）；
     @RequestMapping(value = "/index.do", method = RequestMethod.POST)
-    public ModelAndView login( String userName, String password, String indentifyCode) throws IOException {
+    public ModelAndView login(String userName, String password, String indentifyCode) throws IOException {
         //验证参数合法性，是否非空
         Preconditions.checkNotNull(userName);
         Preconditions.checkNotNull(password);
         Preconditions.checkNotNull(indentifyCode);
 
-        ModelAndView modelAndView = new ModelAndView();
+         ModelAndView modelAndView = new ModelAndView();
 
 
         LoginResult loginResult = new LoginResult();
@@ -69,8 +59,8 @@ public class LoginController {
                     String componentUid = component.getUid();
                     loginResult.setEntityId(componentUid);
                     loginResult.setIndentifyCode(indentifyCode);
-                     List<ComponentHistory> componentHistories = componentHistoryService.selectByTrustorAndTrusteeUid(component);
-                     loginResult.setContent(componentHistories);
+                    List<ComponentHistory> componentHistories = componentHistoryService.selectByTrustorAndTrusteeUid(component);
+                    loginResult.setContent(componentHistories);
                 }
             }
 
@@ -87,6 +77,7 @@ public class LoginController {
 
         } else if (StringUtils.equals(indentifyCode, StaticValue.RENTER)) {
             Renter renter = renterMapper.selectByUid(userName);
+            //  model.addAttribute("renter", renter);
             if (renter != null) {
                 String DBpassword = renter.getPassword();
                 if (StringUtils.equals(DBpassword, password)) {
@@ -100,9 +91,10 @@ public class LoginController {
         }
         if (StringUtils.isNoneEmpty(loginResult.getEntityId())) {
             //把登录的结果（只有身份和实体id）作为字符串返回给modleandview
+           ;
             ObjectMapper mapper = new ObjectMapper();
             String json = mapper.writeValueAsString(loginResult);
-            modelAndView.setViewName("success");
+            modelAndView.setViewName("index");
             modelAndView.addObject("result", json);
         } else {
             modelAndView.setViewName("loginFail");

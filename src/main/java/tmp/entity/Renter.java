@@ -7,6 +7,16 @@ public class Renter {
 
     private String password;
 
+    private String identifyCode;
+
+    public String getIdentifyCode() {
+        return identifyCode;
+    }
+
+    public void setIdentifyCode(String identifyCode) {
+        this.identifyCode = identifyCode;
+    }
+
     public String getPassword() {
         return password;
     }

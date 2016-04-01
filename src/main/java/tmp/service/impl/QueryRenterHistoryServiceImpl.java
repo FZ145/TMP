@@ -5,7 +5,7 @@ import tmp.dao.RenterHistoryMapper;
 
 import tmp.entity.Renter;
 import tmp.entity.RenterHistory;
-import tmp.service.RenterHistoryService;
+import tmp.service.QueryRenterHistoryService;
 
 import javax.annotation.Resource;
 import java.util.List;
@@ -14,7 +14,7 @@ import java.util.List;
  * Created by yuanyao on 2016/3/20.
  */
 @Service("RenterHistoryService")
-public class RenterHistoryServiceImpl implements RenterHistoryService{
+public class QueryRenterHistoryServiceImpl implements QueryRenterHistoryService {
 
     @Resource
     private RenterHistoryMapper renterHistoryMapper;
