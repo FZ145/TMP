@@ -7,20 +7,10 @@ import java.util.List;
  * Created by yuanyao on 2016/1/15.
  */
 public class LoginResult<T> {
+    //实体id,即用户名
     private String EntityId;
-
-    //向前段表明是何种身份
+    //身份识别码，（包括三种身份：renter，component，provider）
     private String indentifyCode;
-
-    private List<T> content;
-
-    public List<T> getContent() {
-        return content;
-    }
-
-    public void setContent(List<T> content) {
-        this.content = content;
-    }
 
     public String getEntityId() {
         return EntityId;
@@ -37,8 +27,6 @@ public class LoginResult<T> {
     public void setIndentifyCode(String indentifyCode) {
         this.indentifyCode = indentifyCode;
     }
-
-
 
     @Override
     public String toString() {
