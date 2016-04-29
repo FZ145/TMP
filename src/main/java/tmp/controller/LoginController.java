@@ -18,6 +18,7 @@ import tmp.service.ComponentHistoryService;
 import tmp.staticvalue.StaticValue;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -26,7 +27,8 @@ import java.util.List;
  */
 
 @Controller
-@RequestMapping(value = "/user")
+//@RequestMapping(value = "/user")
+@SessionAttributes("loginResult")
 public class LoginController {
     @Resource
     private ComponentMapper componentMapper;
@@ -34,19 +36,14 @@ public class LoginController {
     private ProviderMapper providerMapper;
     @Resource
     private RenterMapper renterMapper;
-    @Resource
-    private ComponentHistoryService componentHistoryService;
-
 
     // 用户登录,分为三种用户，分别为provider（云），renter（租户），component（组件）；
     @RequestMapping(value = "/index.do", method = RequestMethod.POST)
-    public ModelAndView login(String userName, String password, String indentifyCode) throws IOException {
+    public String login(String userName, String password, String indentifyCode,HttpSession httpSession) throws IOException {
         //验证参数合法性，是否非空
         Preconditions.checkNotNull(userName);
         Preconditions.checkNotNull(password);
         Preconditions.checkNotNull(indentifyCode);
-
-         ModelAndView modelAndView = new ModelAndView();
 
 
         LoginResult loginResult = new LoginResult();
@@ -59,8 +56,6 @@ public class LoginController {
                     String componentUid = component.getUid();
                     loginResult.setEntityId(componentUid);
                     loginResult.setIndentifyCode(indentifyCode);
-                    List<ComponentHistory> componentHistories = componentHistoryService.selectByTrustorAndTrusteeUid(component);
-                    loginResult.setContent(componentHistories);
                 }
             }
 
@@ -77,33 +72,29 @@ public class LoginController {
 
         } else if (StringUtils.equals(indentifyCode, StaticValue.RENTER)) {
             Renter renter = renterMapper.selectByUid(userName);
-            //  model.addAttribute("renter", renter);
             if (renter != null) {
                 String DBpassword = renter.getPassword();
                 if (StringUtils.equals(DBpassword, password)) {
                     String renterUid = renter.getUid();
                     loginResult.setEntityId(renterUid);
                     loginResult.setIndentifyCode(indentifyCode);
-
                 }
             }
 
         }
+        //如果loginResult中的EntityId不为空，那么将其保存到session中，否则登录失败
         if (StringUtils.isNoneEmpty(loginResult.getEntityId())) {
-            //把登录的结果（只有身份和实体id）作为字符串返回给modleandview
-           ;
-            ObjectMapper mapper = new ObjectMapper();
-            String json = mapper.writeValueAsString(loginResult);
-            modelAndView.setViewName("index");
-            modelAndView.addObject("result", json);
+            httpSession.setAttribute("result",loginResult);
         } else {
-            modelAndView.setViewName("loginFail");
+
+            return "loginFail";
         }
-        return modelAndView;
+        return "loginsuccess";
     }
 
     @RequestMapping(value = "/register.do")
     public String register() {
+
         return "register";
     }
 }
