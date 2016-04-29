@@ -2,6 +2,7 @@ package tmp.controller;
 
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
+import org.omg.CORBA.Object;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
+import tmp.bo.LoginResult;
 import tmp.bo.QueryResult;
 import tmp.dao.ComponentHistoryMapper;
 import tmp.dao.ComponentMapper;
@@ -25,6 +27,7 @@ import tmp.staticvalue.StaticValue;
 
 import javax.annotation.Resource;
 import javax.management.Query;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -52,27 +55,26 @@ public class QueryHistoryController {
     ModelAndView modelAndView = new ModelAndView();
 
     @RequestMapping(value="/queryHistory.do")
-    public ModelAndView queryRenterHistory() throws IOException {
+    public ModelAndView queryRenterHistory(HttpSession httpSession) throws IOException {
+        LoginResult result = (LoginResult) httpSession.getAttribute("result");
 
 
+        String indentifyCode = result.getIndentifyCode();
 
-
-            String indentifyCode = "renter";
-            if(StringUtils.equals(indentifyCode,StaticValue.RENTER)){
+        if (StringUtils.equals(indentifyCode, StaticValue.RENTER)) {
             //如果为租户，则调用此方法
             String uid = "renter1";
             Renter renter1 = renterMapper.selectByUid(uid);
             List<RenterHistory> renterHistories = queryRenterHistoryService.selectByTrustorAndTrusteeUid(renter1);
             queryResult.setResult(renterHistories);
             show();
-            }
-        else if(StringUtils.equals(indentifyCode,StaticValue.COMPONENT)){
-                String uid = "component1";
-                Component component =componentMapper.selectByUid(uid);
-                List<ComponentHistory>  componentHistories = componentHistoryService.selectByTrustorAndTrusteeUid(component);
-               queryResult.setResult(componentHistories);
-               show();
-            }
+        } else if (StringUtils.equals(indentifyCode, StaticValue.COMPONENT)) {
+            String uid = "component1";
+            Component component = componentMapper.selectByUid(uid);
+            List<ComponentHistory> componentHistories = componentHistoryService.selectByTrustorAndTrusteeUid(component);
+            queryResult.setResult(componentHistories);
+            show();
+        }
         return modelAndView;
 
     }
@@ -82,6 +84,7 @@ public class QueryHistoryController {
         String renterJson = mapper.writeValueAsString(queryResult);
         modelAndView.setViewName("queryHistory");
         modelAndView.addObject("result", renterJson);
+          // return renterJson;
 
     }
 
