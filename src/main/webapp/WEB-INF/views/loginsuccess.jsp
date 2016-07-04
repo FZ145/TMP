@@ -26,7 +26,7 @@
 <input type="button" value="click" onclick="say()">
 <hr/>
 
-<div id="say">
+<div id="say" align="right">
 
 </div>
 

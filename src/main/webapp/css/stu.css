@@ -1,0 +1,17 @@
+@charset "utf-8"; 
+/* CSS Document */
+body{font-size:12px;}
+
+.l_nav2{border:#bdd7f2 1px solid; border-top:#0080c4 4px solid;border-bottom:#0080c4 4px solid; background:#ebf7ff url(../Images/leftdhbg.jpg) repeat-y right; margin-left:10px;}
+.l_nav2 .ta1{border-bottom:1px #98c9ee solid; display:block; text-align:center; position:relative; height:38px;line-height:38px;}
+.leftbgbt{position:absolute; background:url(../Images/leftbgbt.jpg) no-repeat; width:11px; height:52px; left:-11px; top:-4px;}
+.leftbgbt2{position:absolute; background:url(../Images/leftbgbt2.jpg) no-repeat; width:11px; height:48px; left:-11px; top:-1px;}
+.cdlist div{height:28px; line-height:24px;border-bottom:1px #98c9ee dotted;}
+.cdlist div a{ display:block; background:#fff;line-height:28px;height:28px; text-align:center;}
+.cdlist div a:hover{color:#f30;background:#0080c4; color:#fff;}
+
+.cztable tr:hover{background-color:#f5fcff}
+
+
+
+
