@@ -11,6 +11,8 @@ pageEncoding="utf-8"%>
 
     <link href="../css/stu.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/highcharts.js"></script>
 </head>
 <body>
 
@@ -23,7 +25,7 @@ pageEncoding="utf-8"%>
                 <p>
 
 
-                    亲爱的 <span id="identify"> ${result.entityId}</span> 欢迎您！
+                    尊敬的 <span id="identify"> ${result.entityId}</span> 欢迎您！
                     身份：      <span id="id">${result.indentifyCode}</span>
                     <a onclick="loginOut()" href="javascript:">安全退出</a>
                 </p>
@@ -116,10 +118,70 @@ pageEncoding="utf-8"%>
         {
             if (xmlhttp.readyState==4 && xmlhttp.status==200)
             {
-                document.getElementById("show").innerHTML=xmlhttp.responseText;
+                var txt=xmlhttp.responseText;
+               document.getElementById("show").innerHTML=txt;
+               // document.getElementById("show").innerHTML=xmlhttp.responseText;
+                var obj = eval ("("+txt+")");
+                var myobj= new Array();
+                var myobj=obj.result;
+
+                var arr= new Array();
+                var arrs= new Array();
+                for(var i=0;i<myobj.length;i++){
+                    arr[i]=myobj[i].actionTime;
+                    arrs[i]=myobj[i].trustValue;
+
+                }
+
+                $(document).ready(function() {
+                    var title = {       //设置标题
+                        text: '信任值走势'
+                    };
+                    var subtitle = {   //设置副标题
+                        text: 'trust value variation'
+                    };
+                    var xAxis = {   //设置X轴的数据来源
+                        categories:arr
+                    };
+                    var yAxis = {  //Y轴
+                        title: {   //设置Y轴标题
+                            text: 'Value'
+                        },
+                        plotLines: [{    //折线
+                            value: 0,
+                            width: 1,
+                            color: '#808080'
+                        }]
+                    };
+
+                    var tooltip = {  //设置鼠标悬停时的数据提示，后缀为空
+                        valueSuffix: ''
+                    }
+
+                    var legend = {   //图例
+                        layout: 'vertical',   //垂直
+                        align: 'right',       //靠右
+                        verticalAlign: 'middle',  //垂直居中
+                        borderWidth: 0             //边线宽度
+                    };
+
+
+
+                    var json = {};
+
+                    json.title = title;
+                    json.subtitle = subtitle;
+                    json.xAxis = xAxis;
+                    json.yAxis = yAxis;
+                    json.tooltip = tooltip;
+                    json.legend = legend;
+                    json.series = series;
+
+                    $('#show').highcharts(json);
+                });
             }
         }
-        xmlhttp.open("post","/user/queryHistory.do",true);
+        xmlhttp.open("get","/user/queryHistory.do",true);
         xmlhttp.send();
     }
 </script>

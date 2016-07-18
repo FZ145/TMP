@@ -57,13 +57,14 @@ public class QueryHistoryController {
     @RequestMapping(value="/queryHistory.do")
     public ModelAndView queryRenterHistory(HttpSession httpSession) throws IOException {
         LoginResult result = (LoginResult) httpSession.getAttribute("result");
-
-
         String indentifyCode = result.getIndentifyCode();
 
         if (StringUtils.equals(indentifyCode, StaticValue.RENTER)) {
             //如果为租户，则调用此方法
-            String uid = "renter1";
+            LoginResult renter= (LoginResult) httpSession.getAttribute("result");
+            String uid = renter.getEntityId();
+            System.out.println(uid);
+           // String uid = "renter1";
             Renter renter1 = renterMapper.selectByUid(uid);
             List<RenterHistory> renterHistories = queryRenterHistoryService.selectByTrustorAndTrusteeUid(renter1);
             queryResult.setResult(renterHistories);

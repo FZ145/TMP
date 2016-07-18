@@ -80,11 +80,14 @@ public class LoginController {
         }
         //如果loginResult中的EntityId不为空，那么将其保存到session中，否则登录失败
         if (StringUtils.isNoneEmpty(loginResult.getEntityId())) {
-            httpSession.setAttribute("result",loginResult);
+           httpSession.setAttribute("result",loginResult);
+
+
 
         } else {
 
             return "loginFail";
+
         }
         return "loginsuccess2";
     }

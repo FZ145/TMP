@@ -126,7 +126,7 @@
     </select>
 
     <select id="selectByTrustorAndTrusteeUid" resultMap="BaseResultMap">
-        select
+        select actionTime,trustValue
         <include refid="Base_Column_List"/>
         from componenttrustvalue
         where
