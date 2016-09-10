@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>this passage is just for testing</title>
+    <script src="//cdn.bootcss.com/jquery/1.11.3/jquery.min.js"></script>
+</head>
+<body>
+<div class = "srd" id = "navGlobal" > <ul>
+    <li class=" welcome">欢迎登陆</li>
+    <li class="first signup"><a href="register.jsp"> reister </a></li>
+    <li class="login"><a href="loginsuccess2.jsp">Login</a></li>
+    </ul>
+</div>
+<script>
+    $(document).ready(function(){
+        $.ajax({
+            url:"result.entityId",
+            type:"post",
+            success:function(data){
+                $(".welcome")[0].innerHTML=data+"欢迎您！";
+            },
+        error:function(data){
+            alert("出错了");
+        }
+        })
+    })
+</script>
+</body>
+</html>

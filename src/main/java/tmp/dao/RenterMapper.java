@@ -16,9 +16,13 @@ public interface RenterMapper {
 
     Renter selectByPrimaryKey(Integer id);
 
+    Renter selectByUid(String uid);
+
     int updateByPrimaryKeySelective(Renter record);
 
     int updateByPrimaryKey(Renter record);
 
     List<Renter> selectAll();
+
+    void  register();
 }

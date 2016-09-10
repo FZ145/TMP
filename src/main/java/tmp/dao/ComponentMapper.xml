@@ -5,9 +5,10 @@
         <id column="id" property="id" jdbcType="INTEGER"/>
         <result column="uid" property="uid" jdbcType="VARCHAR"/>
         <result column="parentUid" property="parentUid" jdbcType="VARCHAR"/>
+        <result column="passowrd" property="password" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-    id, uid, parentUid
+    id, uid,password ,parentUid
   </sql>
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select

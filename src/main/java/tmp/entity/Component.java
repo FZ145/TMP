@@ -7,6 +7,16 @@ public class Component {
 
     private String parentUid;
 
+    private String Password;
+
+    public String getPassword() {
+        return Password;
+    }
+
+    public void setPassword(String password) {
+        Password = password;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -33,6 +43,12 @@ public class Component {
 
     @Override
     public String toString() {
-        return "Component{" + "id=" + id + ", uid='" + uid + '\'' + ", parentUid='" + parentUid + '\'' + '}';
+        final StringBuilder sb = new StringBuilder("Component{");
+        sb.append("id=").append(id);
+        sb.append(", uid='").append(uid).append('\'');
+        sb.append(", parentUid='").append(parentUid).append('\'');
+        sb.append(", Password='").append(Password).append('\'');
+        sb.append('}');
+        return sb.toString();
     }
 }

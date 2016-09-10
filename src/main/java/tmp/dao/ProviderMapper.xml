@@ -6,8 +6,16 @@
         <result column="uid" property="uid" jdbcType="VARCHAR"/>
     </resultMap>
     <sql id="Base_Column_List">
-        id, uid
+        id, uid, password
     </sql>
+
+    <select id="selectByUid" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List"/>
+        from Provider
+        where uid = #{uid,jdbcType=VARCHAR}
+    </select>
+
     <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer">
         select
         <include refid="Base_Column_List"/>
@@ -60,4 +68,13 @@
         <include refid="Base_Column_List"/>
         from provider
     </select>
+
+
+    <insert id="register" parameterType="tmp.entity.Provider">
+        insert into provider ( uid,password)
+
+
+        values (#{uid,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR})
+
+    </insert>
 </mapper>

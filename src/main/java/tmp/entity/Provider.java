@@ -5,6 +5,16 @@ public class Provider {
 
     private String uid;
 
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
     public Integer getId() {
         return id;
     }
@@ -23,6 +33,6 @@ public class Provider {
 
     @Override
     public String toString() {
-        return "Provider{" + "id=" + id + ", uid='" + uid + '\'' + '}';
+        return "Provider{" + "id=" + id + ", uid='" + uid +'\'' + '}';
     }
 }

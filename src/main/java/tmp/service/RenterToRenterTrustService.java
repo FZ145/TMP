@@ -9,5 +9,5 @@ import tmp.entity.Renter;
  */
 public interface RenterToRenterTrustService {
     // 计算租户对租户的全局信任
-    public BigDecimal calcRenterToRenterTrust(Renter trustor, Renter trustee);
+     BigDecimal calcRenterToRenterTrust(Renter trustor, Renter trustee);
 }
