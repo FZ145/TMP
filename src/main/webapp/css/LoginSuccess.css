@@ -10,7 +10,7 @@ body{font-size:12px; line-height:22px;color:#333;}
 .page{width:980px; margin:0 auto; height:70px;position:relative; }
 .page5{width:980px; margin:0 auto; position:relative;}
 .header{height:133px; position:relative;width:930px; margin:0 auto; font-size:12px; line-height:22px; background:url(../Images/Student/kao_top.jpg) no-repeat 0 -20px;}
-.topindex{height:480px; position:relative; background:url(../Images/Student/index/bg.gif) no-repeat 30px 0;}
+.topindex{height:480px; position:relative; background: no-repeat 30px 0;}
 .login{padding:20px;background:#fff; }.login td{padding:6px 3px;}
 .page2{width:1000px; margin:0 auto; font-size:12px; line-height:22px;color:#777;}
 #cct{width:593px;height:305px;position:absolute;left: -3px;top: 130px;}
@@ -37,7 +37,7 @@ body{font-size:12px; line-height:22px;color:#333;}
 .box{overflow:hidden; _zoom:1;}
 .mtop{margin-top:10px;}
 .leftbox{width:140px; float:left;}
-.rightbox{ margin-left:155px; min-height:500px; _height:500px;}
+.rightbox{ margin-left:155px; min-height:500px; }
 .title1{background:url(../Images/Student/title1.jpg) no-repeat; height:30px; line-height:30px; font-size:14px; padding-left:15px; color:#fff;}
 .leftnav{background:url(../Images/Student/bgleftli.jpg) repeat-y; padding:10px 10px 5px;}
 .lefbot{background:url(../Images/Student/bgleftbot.jpg) no-repeat; overflow:hidden; height:8px;}

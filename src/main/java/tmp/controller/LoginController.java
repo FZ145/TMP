@@ -90,7 +90,7 @@ public class LoginController {
 
             return "loginFail";
         }
-        return "loginsuccess";
+        return "loginsuccess2";
     }
 
     @RequestMapping(value = "/register.do")

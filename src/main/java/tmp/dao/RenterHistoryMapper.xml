@@ -116,8 +116,8 @@
     </update>
 
     <select id="selectByTrustorAndTrusteeUid" resultMap="BaseResultMap">
-        select  actionTime,trustvalue
-        <include refid="Base_Column_List"/>
+        select
+       <include refid="Base_Column_List"/>
         from renterhistory
         where
         1
