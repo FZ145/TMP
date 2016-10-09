@@ -85,7 +85,7 @@ public class QueryHistoryController {
         ObjectMapper mapper = new ObjectMapper();
         String renterJson = mapper.writeValueAsString(queryResult);
         modelAndView.setViewName("queryHistory");
-        modelAndView.addObject("result", renterJson);
+        modelAndView.addObject("queryResult", renterJson);
           // return renterJson;
 
     }
