@@ -1,6 +1,7 @@
 package tmp.controller;
 
 
+import com.sun.mail.iap.Response;
 import org.apache.commons.lang3.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.omg.CORBA.Object;
@@ -81,12 +82,15 @@ public class QueryHistoryController {
 
     }
         //把数据库查询得到的数据转换为字符串，保存到modelAndView中
-       private void show() throws IOException{
+       private  String show() throws IOException{
         ObjectMapper mapper = new ObjectMapper();
         String renterJson = mapper.writeValueAsString(queryResult);
+        //modelAndView.setViewName("loginsuccess2");
         modelAndView.setViewName("queryHistory");
-        modelAndView.addObject("queryResult", renterJson);
-          // return renterJson;
+        modelAndView.addObject("result_s", renterJson);
+           return renterJson;
+
+           //System.out.println(renterJson);
 
     }
 
