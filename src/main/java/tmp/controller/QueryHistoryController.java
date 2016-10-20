@@ -1,20 +1,12 @@
 package tmp.controller;
 
-
-import com.sun.mail.iap.Response;
-import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang.StringUtils;
 import org.codehaus.jackson.map.ObjectMapper;
-import org.omg.CORBA.Object;
 import org.springframework.stereotype.Controller;
-
-import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
-
-import org.springframework.web.bind.annotation.SessionAttributes;
 import org.springframework.web.servlet.ModelAndView;
 import tmp.bo.LoginResult;
 import tmp.bo.QueryResult;
-import tmp.dao.ComponentHistoryMapper;
 import tmp.dao.ComponentMapper;
 import tmp.dao.RenterMapper;
 import tmp.entity.Component;
@@ -22,13 +14,9 @@ import tmp.entity.ComponentHistory;
 import tmp.entity.Renter;
 import tmp.entity.RenterHistory;
 import tmp.service.ComponentHistoryService;
-import tmp.service.QueryComponentHistoryService;
 import tmp.service.QueryRenterHistoryService;
 import tmp.staticvalue.StaticValue;
-
-
 import javax.annotation.Resource;
-import javax.management.Query;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
