@@ -8,13 +8,11 @@
         欢迎使用信任管理系统
     </title>
     <style>
-
-        body
-        {
+        body {
             text-align:center;
         }
-
-        a img{boder:0px;}
+        a img{
+            boder:0px;}
 
         a{text-decoration:none;}
 
@@ -33,15 +31,29 @@
 
         $(document).ready(function(){
             $('#truestChangeChart').click(function(){
-              // queryTrustChange();
+
                 $.get(
                         "/user/queryHistory.do",
                         function(data){
                           huatu(data);
                         }
                 );
-            });
 
+            });
+            $('#trustChangeTable').click(function(){
+                $('#chart').load('index.html');
+                $.get(
+                        "/user/queryHistory.do",
+                        function(data){
+                           // drawTable(data);
+                           if(data.length<=0){
+                               alert("没有找到有效数据！");
+                           }else{
+                                //$('#chart').load('loginsuccess1.html');
+                           }
+                        }
+                );
+            });
         });
     </script>
 
@@ -51,23 +63,21 @@
 <!--表格部分 id=_01 -->
 <table id="__01" width="1260" height="768" border="0" cellpadding="0" cellspacing="0">
     <tr>
-        <td width="1260" height="80"  style="background-image: url('/images/sy_01.jpg')" align="right">
-
+        <td width="1366" height="80" style="background-image: url('/images/header.jpg')" align="right">
                 <!--P标签显示登录信息 -->
                 <p>
                     尊敬的 <span id="identify"> ${result.entityId}</span> 欢迎您！
 
-                    身份：      <span id="id">${result.indentifyCode}</span>
+                    身份: <span id="id">${result.indentifyCode}</span>
                    <!-- <a onclick="loginOut()" href="javascript:">安全退出</a> -->
                 </p>
-
         </td>
 
     </tr>
 
     <tr>
         <td width="1260" height="624">
-            <table id="Table1" width="1260" height="624" border="0" cellpadding="0" cellspacing="0">
+            <table id="Table_1" width="1260" height="624" border="0" cellpadding="0" cellspacing="0">
                 <tr>
                     <td width="300" height="624">
                         <table id="Table2" width="300" height="624" border="0" cellpadding="0" cellspacing="0">
@@ -81,7 +91,7 @@
                                 <td rowspan="2">
                                     <img src="images/sy_02_01_02.jpg" width="76" height="577" alt=""></td>
                                 <td width="193" height="389">
-                                    <table id="Table3" width="193" height="389" border="0" cellpadding="0" cellspacing="0">
+                                    <table id="Table_3" width="193" height="389" border="0" cellpadding="0" cellspacing="0">
                                         <tr>
                                             <td>
                                                 <p id="personalCenter" ><img src="images/personalCenter.jpg" width="193" height="77" alt=""></p></td>
@@ -91,21 +101,33 @@
                                                 <a href="http://www.baidu.com" target="_blank"><img src="images/setting.jpg" width="193" height="58" alt=""></a></td>
                                         </tr>
                                         <tr>
-                                            <td width="193" height="54">
-                                                <a href="http://www.baidu.com" target="_blank"></a></td>
-                                        </tr>
-                                        <tr>
                                             <td>
                                                 <p ><img src="images/trustRecord.jpg" width="193" height="83" alt=""></p></td>
-
                                         </tr>
                                         <tr>
                                             <td>
+                                                <!--点击此处，将会查询显示信任变化趋势图 -->
                                                 <a id="truestChangeChart" href="javascript:void(0);" ><img src="images/trustChangeChart.jpg" width="193" height="65" alt=""></a></td>
                                         </tr>
                                         <tr>
                                             <td>
-                                                <a href="http://www.baidu.com" target="_blank"><img src="images/trustChangeTable.jpg" width="193" height="52" alt=""></a></td>
+                                                <!--点击此处，将会查询显示交互的具体信息 -->
+                                                <a  id="trustChangeTable" href="javascript:void(0);" ><img src="images/trustChangeTable.jpg" width="193" height="52" alt=""></a></td>
+                                        </tr>
+
+                                        <tr>
+                                            <td>
+                                                <a href="http://www.baidu.com" target="_blank"><img src="images/decision.jpg" width="186" height="83" alt=""></a></td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td>
+                                                <a href="http://www.baidu.com" target="_blank"><img src="images/service_quality.jpg" width="186" height="55" alt=""></a></td>
+                                        </tr>
+                                        <tr>
+                                            <td>
+                                                <a href="http://www.baidu.com" target="_blank"><img src="images/trust_value.jpg" width="186" height="53" alt=""></a></td>
                                         </tr>
                                     </table>
                                 </td>
@@ -118,17 +140,22 @@
                             </tr>
                         </table>
                     </td>
+
+
                     <td id="chart">
-                        <img src="images/sy_02_02.jpg" width="960" height="624" alt="">
+                        <img src="images/right.jpg" width="960" height="624" alt="">
                     </td>
+
                 </tr>
             </table>
         </td>
     </tr>
+  <!--
     <tr>
         <td>
-            <img src="images/sy_03.jpg" width="1260" height="64" alt=""></td>
+            <img src="images/bottom.jpg" width="1260" height="64" alt=""> </td>
     </tr>
+    -->
 </table>
 
 
@@ -198,7 +225,31 @@
 
 
 </script>
+<script type="text/javascript">
+    function drawTable(data){
+        var i = 0;
+        var j = 0;
+        var obj='';
+        var txt='';
 
+        $(tbody).empty();
+        //把data中的数据取出来，用for循环遍历
+        for(i= 0;i<data.length;i++){
+            obj = data[i];
+            //把每一次交互的各项指标取出
+            for(j in obj){
+                //使用指标拼接td
+                txt= txt +'<td>'+obj[j]+'</td>';
+            }
+            //把单个内容插入表格
+            $(txt).appendTo('tbody').wrapAll('<tr></tr>');
+            txt= '';
+        }
+        $('#chart').innerHTML;
+    }
+
+
+</script>
 </body>
 </html>
 

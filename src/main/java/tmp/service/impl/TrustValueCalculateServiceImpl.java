@@ -1,5 +1,6 @@
 package tmp.service.impl;
 
+
 import com.google.common.collect.Lists;
 import org.springframework.stereotype.Service;
 import tmp.entity.EvidenceWeight;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Service("trustValueCalculator")
 public class TrustValueCalculateServiceImpl implements TrustValueCalculateService {
-    @Override
+    //@Override
     public List<BigDecimal> trustValueCalculate(TrustEvidence trustEvidence, EvidenceWeight evidenceWeight) {
         //获取某一类的行为证据
         String[] trustEvidences = trustEvidence.getTrustValue().split(",");

@@ -2,25 +2,20 @@ package tmp.controller;
 
 import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.map.ObjectMapper;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 import tmp.bo.LoginResult;
 import tmp.dao.ComponentMapper;
 import tmp.dao.ProviderMapper;
 import tmp.dao.RenterMapper;
 import tmp.entity.Component;
-import tmp.entity.ComponentHistory;
 import tmp.entity.Provider;
 import tmp.entity.Renter;
-import tmp.service.ComponentHistoryService;
 import tmp.staticvalue.StaticValue;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
-import java.util.List;
 
 
 /**
@@ -40,7 +35,7 @@ public class LoginController {
 
     // 用户登录,分为三种用户，分别为provider（云），renter（租户），component（组件）；
     @RequestMapping(value = "/index.do", method = RequestMethod.POST)
-    public String login(String userName, String password, String indentifyCode,HttpSession httpSession) throws IOException {
+    public String login(String userName, String password, String indentifyCode, HttpSession httpSession) throws IOException {
         //验证参数合法性，是否非空
         Preconditions.checkNotNull(userName);
         Preconditions.checkNotNull(password);
@@ -85,12 +80,12 @@ public class LoginController {
         }
         //如果loginResult中的EntityId不为空，那么将其保存到session中，否则登录失败
         if (StringUtils.isNoneEmpty(loginResult.getEntityId())) {
-            httpSession.setAttribute("result",loginResult);
+            httpSession.setAttribute("result", loginResult);
         } else {
 
             return "loginFail";
         }
-        return "loginsuccess2";
+        return "loginsuccess";
     }
 
     @RequestMapping(value = "/register.do")
