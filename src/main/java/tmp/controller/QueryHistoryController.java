@@ -76,6 +76,7 @@ public class QueryHistoryController {
         //modelAndView.setViewName("loginsuccess2");
         modelAndView.setViewName("queryHistory");
         modelAndView.addObject("result_s", renterJson);
+
            return renterJson;
 
            //System.out.println(renterJson);
