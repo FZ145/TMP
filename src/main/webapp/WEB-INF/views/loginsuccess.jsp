@@ -181,8 +181,8 @@ desired effect
                      </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li><a id="trustChart" href="#" >信任变化趋势</a></li>
-                        <li><a id="trustTable"  href="#">信任交互记录</a></li>
+                        <li><a id="trustChart" href="javascript:void(0);" >信任变化趋势</a></li>
+                        <li><a id="trustTable"  href="javascript:void(0);">信任交互记录</a></li>
                     </ul>
                 </li>
                 <li class="treeview">
@@ -207,8 +207,8 @@ desired effect
         <!-- Content Header (Page header) -->
         <section class="content-header">
             <h1 id="option">
-                人与人之间最基本的信任都没有了吗？
-                <small>Optional description</small>
+               欢迎使用信任管理系统
+                <small>云计算环境下面向多用户的信任管理系统</small>
             </h1>
             <ol class="breadcrumb">
                 <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
@@ -222,13 +222,36 @@ desired effect
 
             <!-- Your Page Content Here -->
 
-            <div id="show">
+            <div id="show" align="center">
+               <h1>我有一头小毛驴，我从来也不骑</h1>
+                <table width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td align="center" style="font-weight: bold">用户名</td>
+                        <td align="center">${result.entityId}</td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="font-weight: bold">身份</td>
+                        <td align="center" style="font-weight: bold">${result.indentifyCode}</td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="font-weight: bold">邮箱</td>
+                        <td align="center"><input></td>
+                    </tr>
+
+                    <tr>
+                        <td align="center" style="font-weight: bold">修改密码</td>
+                        <td align="center"><input value="请输入新密码" onfocus="this.value=''" ></td>
+                    </tr>
+                </table>
 
             </div>
         </section>
         <!-- /.content -->
     </div>
     <!-- /.content-wrapper -->
+
 
     <!-- Main Footer -->
     <footer class="main-footer">
@@ -239,7 +262,6 @@ desired effect
         <!-- Default to the left -->
         <strong>Copyright &copy; 2016 <a href="#">Company</a>.</strong> All rights reserved.
     </footer>
-
     <!-- Control Sidebar -->
     <aside class="control-sidebar control-sidebar-dark">
         <!-- Create the tabs -->
@@ -344,12 +366,14 @@ desired effect
             $('#option').text("信任变化趋势图");
         });
         $('#trustTable').click(function(){
-            $.get(
+          <% /* $.get(
                     "/user/queryHistory.do",
                     function(data){
-                        drawTable(data);
+                        $('#show').innerHTML=data;
+                        //drawTable(data);
                     }
-            );
+            ); */%>
+            $('#show').load("tableC.HTML");
             $('#option').text("信任交互记录表");
         });
     });
